@@ -1,0 +1,191 @@
+columns:
+  fonts:
+    width: 1/1
+    sections:
+      fontFiles:
+        type: fields
+        fields:
+          fontFile:
+            label: Schrift Dateien
+            type: structure
+            help: Die Schriftdateien müssen im Format WOFF2 vorliegen. Sie können auf https://transfonter.org/ mit den default Einstellungen generiert werden. Die Werte "sans" und "serif" sind nicht erlaubt.
+            width: 1/2
+            translate: false
+            fields:
+              name:
+                label: Name
+                pattern: "^(?!.*(?:serif|sans))[a-zA-Z0-9]+$"
+                type: text
+                width: 1/2
+                required: true
+              file2:
+                label: Datei WOFF2
+                type: files
+                multiple: false
+                required: true
+                help: Erlaubtes Format - WOFF2
+                query: site.files.filterBy('template', 'woff2')
+                uploads:
+                  template: woff2
+                width: 1/2
+      fontSizes:
+        type: fields
+        fields:
+          fontSize:
+            label: Schriftgrößen
+            type: structure
+            translate: false
+            width: 1/1
+            fields:
+              name:
+                label: Name
+                type: text
+                width: 1/3
+                required: true
+              sizeGap:
+                type: gap
+                width: 2/3
+                required: true
+                after: px
+              sizeMobile:
+                label: Größe 📱
+                type: number
+                width: 1/3
+                required: true
+                after: px
+              lineHeightMobile:
+                label: Zeilenabstand 📱
+                type: number
+                width: 1/3
+                required: true
+                after: px
+              letterSpacingMobile:
+                label: Laufweite 📱
+                type: number
+                width: 1/3
+                default: 0
+                after: px
+              sizeDesktop:
+                label: Größe 💻 < 1920px
+                type: number
+                width: 1/3
+                after: px
+              lineHeightDesktop:
+                label: Zeilenabstand 💻 < 1920px
+                type: number
+                width: 1/3
+                after: px
+              letterSpacingDesktop:
+                label: Laufweite 💻 < 1920px
+                type: number
+                width: 1/3
+                default: 0
+                after: px
+              sizeDesktopXl:
+                label: Größe 💻 > 1920px
+                type: number
+                width: 1/3
+                after: px
+              lineHeightDesktopXl:
+                label: Zeilenabstand 💻 > 1920px
+                type: number
+                width: 1/3
+                after: px
+              letterSpacingDesktopXl:
+                label: Laufweite 💻 > 1920px
+                type: number
+                width: 1/3
+                default: 0
+                after: px
+              transform:
+                label: Transformation
+                type: select
+                width: 1/3
+                default: none
+                options:
+                  none: Keine
+                  uppercase: Großbuchstaben
+                  lowercase: Kleinbuchstaben
+                  capitalize: Erster Buchstabe groß
+              decoration:
+                label: Dekoration
+                type: select
+                width: 1/3
+                default: none
+                options:
+                  none: Keine
+                  underline: Unterstrichen
+                  line-through: Durchgestrichen
+                  overline: Überstrichen
+                  overline underline: Überstrichen und Unterstrichen
+
+      fontHeadlines:
+        type: fields
+        fields:
+          headlines:
+            type: object
+            label: Überschriften für Textfelder
+            icon: title
+            toggle: true
+            translate: false
+            fields:
+              h1font:
+                extends: fields/fontFile
+                label: H1 Schriftart
+                width: 1/6
+                translate: false
+              h1size:
+                extends: fields/fontSize
+                width: 1/6
+                label: H1 Größe
+                translate: false
+              h2font:
+                extends: fields/fontFile
+                label: H2 Schriftart
+                width: 1/6
+                translate: false
+              h2size:
+                extends: fields/fontSize
+                label: H2 Größe
+                width: 1/6
+                translate: false
+              h3font:
+                extends: fields/fontFile
+                label: H3 Schriftart
+                width: 1/6
+                translate: false
+              h3size:
+                extends: fields/fontSize
+                label: H3 Größe
+                width: 1/6
+                translate: false
+              h4font:
+                extends: fields/fontFile
+                label: H4 Schriftart
+                width: 1/6
+                translate: false
+              h4size:
+                extends: fields/fontSize
+                label: H4 Größe
+                width: 1/6
+                translate: false
+              h5font:
+                extends: fields/fontFile
+                label: H5 Schriftart
+                width: 1/6
+                translate: false
+              h5size:
+                extends: fields/fontSize
+                label: H5 Größe
+                width: 1/6
+                translate: false
+              h6font:
+                extends: fields/fontFile
+                label: H6 Schriftart
+                width: 1/6
+                translate: false
+              h6size:
+                extends: fields/fontSize
+                label: H6 Größe
+                width: 1/6
+                translate: false

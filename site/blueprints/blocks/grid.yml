@@ -1,0 +1,15 @@
+name: Grid
+icon: grid
+fields:
+  title:
+    type: text
+  grid:
+    type: layout
+    when:
+      - false
+    extends: fields/layoutSizes
+    fieldsets:
+      text: fields/fieldsets-text
+      media: fields/fieldsets-media
+      elements: fields/fieldsets-elements
+      tools: fields/fieldsets-tools

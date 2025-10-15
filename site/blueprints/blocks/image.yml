@@ -1,0 +1,33 @@
+name: field.blocks.image.name
+icon: image
+preview: image
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      image:
+        label: field.blocks.image.name
+        type: files
+        query: model.images
+        multiple: false
+        image:
+          back: black
+        uploads:
+          template: pixel
+        help: "Für weitere Optionen (Fokus, Link und Beschriftung) das Bild anklicken."
+  settings:
+    label: Einstellungen
+    fields:
+      ratioHeadline:
+        label: Seitenverhältnis
+        type: headline
+        numbered: false
+      ratioMobile:
+        extends: fields/ratio
+        label: Seitenverhältnis 📱
+      ratio:
+        extends: fields/ratio
+        label: Seitenverhältnis 🖥️
+      loading: fields/loading
+      meta: fields/metadata

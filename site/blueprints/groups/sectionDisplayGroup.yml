@@ -1,0 +1,127 @@
+type: group
+fields:
+  fontHeadline:
+    label: Schriften
+    type: headline
+    numbered: false
+  fontTitleToggle:
+    label: Titel aktiv?
+    type: toggle
+    default: true
+    width: 1/2
+  fontTextToggle:
+    label: Text aktiv?
+    type: toggle
+    default: true
+    width: 1/2
+  fontTitle:
+    type: object
+    label: Titel
+    width: 1/2
+    when:
+      fontTitleToggle: true
+    fields:
+      titleSettings:
+        label: Titel Einstellungen
+        extends: groups/titleGroup
+  fontText:
+    type: object
+    label: Text
+    width: 1/2
+    when:
+      fontTextToggle: true
+    fields:
+      textSettings:
+        label: Text Einstellungen
+        extends: groups/textGroup
+  captionAlign:
+    extends: fields/captionAlign
+    default: bottom
+    width: 1/4
+  captionControls:
+    label: Optionen
+    type: checkboxes
+    width: 1/4
+    columns: 1
+    options:
+      overlay: Overlay
+  captionOverlayRange:
+    label: Overlay Transparenz
+    type: range
+    min: 0
+    max: 100
+    step: 1
+    default: 50
+    width: 1/4
+  captionColor:
+    label: Overlay Farbe
+    type: color
+    default: "#000000"
+    width: 1/4
+  displayHeadline:
+    label: Darstellung
+    type: headline
+    numbered: false
+  displayGrid:
+    label: Grid Darstellung
+    type: object
+    width: 1/2
+    fields:
+      spanMobile:
+        label: Spanne 📱
+        extends: fields/span
+        options:
+          - value: "2"
+            text: 2 Spalten
+          - value: "3"
+            text: 3 Spalten
+          - value: "6"
+            text: 6 Spalten
+        width: 1/2
+      span:
+        label: Spanne 🖥️
+        extends: fields/span
+        options:
+          - value: "2"
+            text: 2 Spalten
+          - value: "3"
+            text: 3 Spalten
+          - value: "4"
+            text: 4 Spalten
+          - value: "6"
+            text: 6 Spalten
+          - value: "12"
+            text: 12 Spalten
+      gapMobile:
+        label: Abstand Reihen Elemente 📱
+        extends: fields/spacing
+        width: 1/2
+      gap:
+        label: Abstand Reihen Elemente 🖥️
+        extends: fields/spacing
+        width: 1/2
+      gapHorizontalMobile:
+        label: Abstand Spalten Elemente 📱
+        extends: fields/spacing
+        default: default
+        width: 1/2
+      gapHorizontal:
+        label: Abstand Spalten Elemente 🖥️
+        extends: fields/spacing
+        default: default
+        width: 1/2
+  displayRatio:
+    label: Seitenverhältnis der Cover Bilder
+    type: object
+    width: 1/2
+    fields:
+      ratioMobile:
+        extends: fields/ratio
+        label: Seitenverhältnis📱
+        width: 1/2
+        required: false
+      ratio:
+        extends: fields/ratio
+        label: Seitenverhältnis 🖥️
+        width: 1/2
+        required: false

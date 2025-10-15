@@ -1,0 +1,10 @@
+type: group
+fields:
+  textFont:
+    extends: fields/fontFile
+  textSize:
+    extends: fields/fontSize
+  textColor:
+    extends: fields/fontColor
+  textAlign:
+    extends: fields/fontAlign

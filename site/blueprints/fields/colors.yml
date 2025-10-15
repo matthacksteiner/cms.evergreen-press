@@ -1,0 +1,7 @@
+options:
+  primary: Primäre Farbe
+  secondary: Sekundäre Farbe
+  tertiary: Teritäre Farbe
+  black: Schwarz
+  white: Weiß
+  transparent: Transparent

@@ -1,0 +1,58 @@
+# ------------------------------------------------------------------------------
+# OS & Editor specific files
+# ------------------------------------------------------------------------------
+.DS_Store
+_MACOSX
+__MACOSX
+.idea
+.run
+.vscode/
+
+# ------------------------------------------------------------------------------
+# Local Environment & Tooling
+# ------------------------------------------------------------------------------
+.ddev/*
+.env
+.kiro/*
+CRUSH.md
+herd.yml
+
+# ------------------------------------------------------------------------------
+# Kirby CMS Core, Content & Dependencies
+# ------------------------------------------------------------------------------
+/content
+/kirby
+/node_modules
+/public/assets/dist
+/public/media
+/storage/accounts
+/storage/backups
+/storage/cache
+/storage/sessions
+/vendor
+
+# ------------------------------------------------------------------------------
+# Kirby Site Configuration
+# ------------------------------------------------------------------------------
+# Ignore all language files except German
+site/languages/*
+!site/languages/de.php
+
+# ------------------------------------------------------------------------------
+# Kirby Plugins
+# ------------------------------------------------------------------------------
+# Ignore all plugins by default, then whitelist Baukasten-specific plugins
+site/plugins/*
+!site/plugins/baukasten-api/
+!site/plugins/baukasten-blocks/
+!site/plugins/baukasten-blocks-preview/
+!site/plugins/baukasten-cache-manager/
+!site/plugins/baukasten-field-labels/
+!site/plugins/baukasten-field-methods/
+!site/plugins/baukasten-grid-blocks/
+!site/plugins/baukasten-kirby-routes/
+!site/plugins/baukasten-layouts/
+!site/plugins/baukasten-meta/
+!site/plugins/baukasten-mime/
+!site/plugins/baukasten-programmable-blueprints/
+!site/plugins/meta/

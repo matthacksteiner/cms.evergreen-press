@@ -1,0 +1,12 @@
+type: layout
+extends: fields/layoutSizes
+
+fieldsets:
+  text: fields/fieldsets-text
+  media: fields/fieldsets-media
+  elements: fields/fieldsets-elements
+  tools:
+    extends: fields/fieldsets-tools
+    fieldsets:
+      columns: blocks/columns
+      grid: blocks/grid

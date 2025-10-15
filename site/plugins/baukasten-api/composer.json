@@ -1,0 +1,32 @@
+{
+	"name": "baukasten/api",
+	"description": "A comprehensive API plugin for the Baukasten Kirby CMS that provides structured API endpoints, helper functions, and routing logic for headless CMS functionality.",
+	"type": "kirby-plugin",
+	"license": "MIT",
+	"version": "1.0.0",
+	"authors": [
+		{
+			"name": "Baukasten Team",
+			"email": "contact@matthiashacksteiner.net"
+		}
+	],
+	"require": {
+		"getkirby/composer-installer": "^1.2",
+		"getkirby/cms": "^3.7"
+	},
+	"extra": {
+		"installer-name": "baukasten-api"
+	},
+	"config": {
+		"optimize-autoloader": true
+	},
+	"keywords": [
+		"kirby",
+		"cms",
+		"api",
+		"headless",
+		"baukasten",
+		"routes",
+		"helpers"
+	]
+}

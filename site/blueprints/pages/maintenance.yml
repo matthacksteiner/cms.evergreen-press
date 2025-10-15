@@ -1,0 +1,27 @@
+title: Wartung
+icon: lab
+
+options:
+  url: false
+  status: false
+  delete: false
+  duplicate: false
+  listed: false
+
+tabs:
+  content:
+    icon: text
+    label: Inhalt
+    fields:
+      maintenanceToggle:
+        type: toggle
+        label: Wartungsmodus aktivieren
+        default: false
+      layout:
+        extends: fields/layout
+        settings: tabs/config
+        when:
+          maintenanceToggle: true
+
+  media: tabs/media
+  meta: tabs/meta/site

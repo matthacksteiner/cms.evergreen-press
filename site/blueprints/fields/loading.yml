@@ -1,0 +1,17 @@
+type: group
+fields:
+  aboveFoldHeadline:
+    label: Ladeverhalten
+    type: headline
+    numbered: false
+  aboveFold:
+    label: Above Fold?
+    type: toggle
+    default: false
+    width: 1/6
+  aboveFoldHelp:
+    type: info
+    theme: passive
+    label: Information
+    width: 5/6
+    text: "Aktivieren, wenn das Bild im sichtbaren Bereich der Seite (above the fold) angezeigt wird."

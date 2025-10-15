@@ -1,0 +1,8 @@
+label: Textgröße
+type: select
+width: 1/6
+options:
+  type: query
+  query: site.fontSize.toStructure
+  text: "{{ structureItem.name}}"
+  value: "{{ structureItem.name}}"

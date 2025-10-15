@@ -1,0 +1,326 @@
+name: Kontaktformular
+icon: email
+preview: fields
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      formName:
+        label: Formular Name
+        type: text
+        help: Eindeutiger Name für das Formular (wird in Netlify verwendet)
+        placeholder: kontakt
+        required: true
+        default: kontakt
+        width: 1/2
+      emailSubject:
+        label: E-Mail Betreff
+        type: text
+        placeholder: Neue Nachricht von der Website
+        help: Betreff für die E-Mail-Benachrichtigung
+        required: true
+        width: 1/2
+      successPage:
+        label: Erfolgsseite
+        extends: fields/linkField
+        fields:
+          link:
+            options:
+              - page
+              - url
+        help: URL zur Weiterleitung nach erfolgreichem Absenden (optional)
+        width: 1/2
+      spamProtection:
+        label: Spam-Schutz
+        type: select
+        options:
+          captcha: reCAPTCHA (empfohlen)
+          honeypot: Honeypot
+          none: Kein Spam-Schutz
+        default: captcha
+        help: Wählen Sie die Art des Spam-Schutzes
+        required: true
+        width: 1/2
+      fields:
+        label: Formularfelder Beschriftung (optional)
+        type: object
+        fields:
+          firstname:
+            type: object
+            label: Vorname Feld
+            width: 1/2
+            fields:
+              required:
+                label: Pflichtfeld?
+                type: toggle
+                default: false
+                width: 1/6
+              label:
+                label: Label
+                type: text
+                width: 5/6
+              placeholder:
+                label: Platzhalter
+                type: text
+              help:
+                label: Hilfe Text
+                type: text
+          lastname:
+            type: object
+            label: Nachname Feld
+            width: 1/2
+            fields:
+              required:
+                label: Pflichtfeld?
+                type: toggle
+                default: false
+                width: 1/6
+              label:
+                label: Label
+                type: text
+                width: 5/6
+              placeholder:
+                label: Platzhalter
+                type: text
+              help:
+                label: Hilfe Text
+                type: text
+          email:
+            type: object
+            label: E-Mail Feld
+            width: 1/2
+            fields:
+              label:
+                label: Label
+                type: text
+                default: E-Mail
+              placeholder:
+                label: Platzhalter
+                type: text
+              help:
+                label: Hilfe Text
+                type: text
+          message:
+            type: object
+            label: Nachricht Feld
+            width: 1/2
+            fields:
+              required:
+                label: Pflichtfeld?
+                type: toggle
+                default: false
+                width: 1/6
+              label:
+                label: Label
+                type: text
+                width: 5/6
+              placeholder:
+                label: Platzhalter
+                type: text
+              rows:
+                label: Zeilen
+                type: number
+                default: 5
+                min: 2
+                max: 10
+              help:
+                label: Hilfe Text
+                type: text
+          submitButton:
+            label: Absenden-Button Text
+            type: object
+            width: 1/2
+            fields:
+              placeholder:
+                label: Platzhalter
+                type: text
+          successMessage:
+            label: Erfolgsmeldung
+            type: object
+            width: 1/1
+            fields:
+              text:
+                label: Text
+                type: textarea
+                buttons: false
+                rows: 3
+                default: Vielen Dank! Ihre Nachricht wurde erfolgreich versendet.
+                help: Text, der angezeigt wird, wenn das Formular erfolgreich abgeschickt wurde.
+          errorMessage:
+            label: Fehlermeldung
+            type: object
+            width: 1/1
+            fields:
+              text:
+                label: Text
+                type: textarea
+                default: Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.
+                buttons: false
+                rows: 3
+                help: Text, der angezeigt wird, wenn das Formular einen Fehler hat.
+      information:
+        label: Information
+        type: info
+        text: |
+          Dieses Formular wird mit Netlify Forms versendet.
+
+          Netlify Konfiguration:
+          - **Formularerkennung aktivieren:** Netlify Dashboard → Forms
+          - **E-Mail Benachrichtigungen hinzufügen:** Project configuration → Notifications
+  einstellungen:
+    label: Einstellungen
+    fields:
+      layoutHeadline:
+        label: Layout Einstellungen
+        type: headline
+        numbered: false
+      fieldSpacing:
+        label: Feld-Abstand
+        type: select
+        options:
+          small: Klein
+          medium: Mittel
+          large: Groß
+        default: medium
+        width: 1/4
+      formWidth:
+        label: Formular-Breite
+        type: select
+        options:
+          full: Vollbreite
+          large: Groß (75%)
+          medium: Mittel (50%)
+          small: Klein (33%)
+        default: full
+        width: 1/4
+      formAlign:
+        label: Formular-Ausrichtung
+        type: select
+        options:
+          left: Links
+          center: Zentriert
+          right: Rechts
+        default: left
+        width: 1/4
+      formBorderRadius:
+        label: Felder-Rundung
+        type: number
+        placeholder: 0
+        after: px
+        width: 1/4
+      textHeadline:
+        label: Text Einstellungen
+        type: headline
+        numbered: false
+      textGroup:
+        extends: groups/textGroup
+      buttonHeadline:
+        label: Button Einstellungen
+        type: headline
+        numbered: false
+      buttonLocal:
+        type: toggle
+        label: Lokale Button Einstellungen
+        width: 1/4
+      buttonGap:
+        type: gap
+        width: 3/4
+      buttonSettings:
+        type: object
+        label: Button Einstellungen
+        icon: cog
+        width: 1/2
+        when:
+          buttonLocal: true
+        fields:
+          buttonFont:
+            extends: fields/fontFile
+            required: false
+            width: 1/3
+          buttonFontSize:
+            extends: fields/fontSize
+            width: 1/3
+          buttonGap:
+            type: gap
+            width: 1/3
+          buttonBorderRadius:
+            label: Rand Rundung
+            type: number
+            placeholder: 0
+            after: px
+            width: 1/3
+          buttonBorderWidth:
+            label: Rand Strichstärke
+            type: number
+            placeholder: 0
+            after: px
+            width: 1/3
+          buttonPadding:
+            label: Abstand
+            type: number
+            placeholder: 10
+            width: 1/3
+            after: px
+      buttonColors:
+        type: object
+        label: Button Farben
+        icon: palette
+        width: 1/2
+        when:
+          buttonLocal: true
+        toggle: true
+        fields:
+          buttonBackgroundColor:
+            label: Farbe Hintergrund
+            type: select
+            default: primary
+            extends: fields/colors
+            width: 1/3
+          buttonBackgroundColorActive:
+            label: Farbe Hintergrund Hover
+            type: select
+            default: primary
+            extends: fields/colors
+            width: 1/3
+          buttonGapColor1:
+            type: gap
+            width: 1/3
+          buttonTextColor:
+            label: Farbe Text
+            type: select
+            default: secondary
+            extends: fields/colors
+            width: 1/3
+          buttonTextColorActive:
+            label: Farbe Text Hover
+            type: select
+            default: secondary
+            extends: fields/colors
+            width: 1/3
+          buttonGapColor2:
+            type: gap
+            width: 1/3
+          buttonBorderColor:
+            label: Rand Farbe
+            type: select
+            default: primary
+            extends: fields/colors
+            width: 1/3
+          buttonBorderColorActive:
+            label: Rand Farbe Hover
+            type: select
+            default: primary
+            extends: fields/colors
+            width: 1/3
+      buttonAlign:
+        extends: fields/align
+        label: Button Ausrichtung
+        width: 1/4
+
+      # Metadata
+      metaHeadline:
+        label: Meta Einstellungen
+        type: headline
+        numbered: false
+      metadata:
+        extends: fields/metadata

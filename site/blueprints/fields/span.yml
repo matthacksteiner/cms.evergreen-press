@@ -1,0 +1,4 @@
+type: select
+placeholder: false
+default: "6"
+width: 1/2

@@ -1,0 +1,41 @@
+title: Sektions Eintrag
+icon: add
+
+buttons:
+  - status
+  - languages
+  - frontend-preview
+  - frontend-open
+
+tabs:
+  content:
+    label: Inhalt
+    icon: text
+    columns:
+      - width: 3/4
+        fields:
+          layout:
+            extends: fields/layout
+            settings: tabs/config
+      - width: 1/4
+        fields:
+          thumbnail:
+            label: Cover
+            multiple: false
+            type: files
+            help: "Dieses Bild dient als Anzeigebild in der Übersicht."
+            required: true
+            uploads:
+              template: pixel
+          description:
+            label: Beschreibung
+            type: text
+            help: "Wird in der Übersicht angezeigt."
+          coverOnly:
+            label: Cover Only
+            type: toggle
+            default: false
+            help: "Wenn aktiviert, wird der Eintrag nur als Cover angezeigt und es gibt keine Unterseiten."
+
+  media: tabs/media
+  meta: tabs/meta/site

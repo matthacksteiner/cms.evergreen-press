@@ -1,0 +1,23 @@
+# Dependencies
+/vendor
+/node_modules
+
+# Kirby core
+/kirby
+
+# Build artifacts
+/storage
+/public/media
+
+# Third-party plugins (installed via composer/package managers)
+/site/plugins/*/vendor
+/site/plugins/*/node_modules
+
+# Compiled/minified files
+*.min.js
+*.min.css
+
+# Documentation that shouldn't be reformatted
+LICENSE.md
+CHANGELOG.md
+

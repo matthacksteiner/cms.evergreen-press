@@ -1,0 +1,25 @@
+title: Fehler
+icon: alert
+
+buttons:
+  - languages
+  - frontend-preview
+  - frontend-open
+
+options:
+  url: false
+  status: false
+  delete: false
+  duplicate: false
+  listed: false
+
+tabs:
+  content:
+    extends: tabs/blocks
+    fields:
+      layout:
+        translate: false
+        help: >
+          Konfiguration über die deutschen Seite.
+  media: tabs/media
+  meta: tabs/meta/site

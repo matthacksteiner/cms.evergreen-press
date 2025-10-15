@@ -1,0 +1,6 @@
+label: Text
+type: group
+fieldsets:
+  title: blocks/heading
+  text: blocks/text
+  quoteSlider: blocks/quoteSlider

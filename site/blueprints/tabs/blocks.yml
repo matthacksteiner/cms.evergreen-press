@@ -1,0 +1,6 @@
+icon: text
+label: Inhalt
+fields:
+  layout:
+    extends: fields/layout
+    settings: tabs/config

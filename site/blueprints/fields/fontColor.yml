@@ -1,0 +1,5 @@
+label: Textfarbe
+type: select
+default: black
+width: 2/6
+extends: fields/colors

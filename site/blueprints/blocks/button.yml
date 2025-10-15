@@ -1,0 +1,26 @@
+name: Button
+icon: url
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      linkObject:
+        extends: fields/linkField
+
+  settings:
+    label: Einstellungen
+    fields:
+      info:
+        label: Info
+        type: info
+        text: |
+          Die Darstellung aller Button wird im **Tab** Design festgelegt.
+      buttonAlign:
+        extends: fields/align
+        width: 1/4
+      buttonLine:
+        type: line
+      buttonLocal:
+        extends: groups/buttonGroup
+      meta: fields/metadata

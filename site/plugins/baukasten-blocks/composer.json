@@ -1,0 +1,32 @@
+{
+	"name": "baukasten/blocks",
+	"description": "A comprehensive block processing plugin for the Baukasten Kirby CMS that handles content blocks and converts them into structured arrays for frontend consumption.",
+	"type": "kirby-plugin",
+	"license": "MIT",
+	"version": "1.0.0",
+	"authors": [
+		{
+			"name": "Baukasten Team",
+			"email": "contact@matthiashacksteiner.net"
+		}
+	],
+	"require": {
+		"getkirby/composer-installer": "^1.2",
+		"getkirby/cms": "^3.7"
+	},
+	"extra": {
+		"installer-name": "baukasten-blocks"
+	},
+	"config": {
+		"optimize-autoloader": true
+	},
+	"keywords": [
+		"kirby",
+		"cms",
+		"blocks",
+		"content",
+		"baukasten",
+		"processing",
+		"frontend"
+	]
+}

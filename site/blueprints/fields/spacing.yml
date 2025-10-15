@@ -1,0 +1,38 @@
+type: select
+options:
+  - value: "default"
+    text: Standard (Einstellung im Tab Design)
+  - value: "0"
+    text: 0px
+  - value: "8"
+    text: 8px
+  - value: "16"
+    text: 16px
+  - value: "24"
+    text: 24px
+  - value: "32"
+    text: 32px
+  - value: "40"
+    text: 40px
+  - value: "48"
+    text: 48px
+  - value: "56"
+    text: 56px
+  - value: "64"
+    text: 64px
+  - value: "80"
+    text: 80px
+  - value: "96"
+    text: 96px
+  - value: "128"
+    text: 128px
+  - value: "160"
+    text: 160px
+  - value: "192"
+    text: 192px
+  - value: "256"
+    text: 256px
+default: "0"
+after: px
+width: 1/4
+required: true

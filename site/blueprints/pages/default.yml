@@ -1,0 +1,21 @@
+title: Standard
+icon: paragraph
+
+buttons:
+  - status
+  - languages
+  - frontend-preview
+  - frontend-open
+
+status:
+  draft:
+    label: Entwurf
+  unlisted:
+    label: Unveröffentlicht
+  listed:
+    label: Veröffentlicht
+
+tabs:
+  content: tabs/blocks
+  media: tabs/media
+  meta: tabs/meta/site

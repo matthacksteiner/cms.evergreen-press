@@ -1,0 +1,73 @@
+columns:
+  analyticsSearchConsole:
+    width: 1/2
+    sections:
+      searchConsole:
+        type: fields
+        fields:
+          searchConsoleToggle:
+            width: 1/3
+            type: toggle
+            label: Google Search Console
+            text: >
+              Aktivieren
+            default: false
+            translate: false
+          searchConsoleCode:
+            width: 1/1
+            type: text
+            label: Google Search Console Code
+            help: >
+              Der Wert von <b>content</b> im HTML-TAG
+            required: true
+            translate: false
+            placeholder: "xJ_w_cDXrbjHU4wBU6nFUNDqD_ST_9GkbQb8NMIv-cY"
+            when:
+              searchConsoleToggle: true
+  analyticsGoogleAnalytics:
+    width: 1/2
+    sections:
+      googleAnalytics:
+        type: fields
+        fields:
+          googleAnalyticsToggle:
+            width: 1/3
+            type: toggle
+            label: Google Analytics
+            text: >
+              Aktivieren
+            default: false
+            translate: false
+          googleAnalyticsCode:
+            width: 1/1
+            type: text
+            label: Google Analytics ID
+            help: >
+              ID am Ende des Google Analytics Script
+            required: true
+            translate: false
+            placeholder: "G-224EMLTRPD"
+            when:
+              googleAnalyticsToggle: true
+  analyticsNav:
+    width: 1/2
+    sections:
+      links:
+        type: fields
+        fields:
+          analyticsLink:
+            extends: fields/linkField
+            label: Link zu Datenschutzerklärung
+            fields:
+              linkText:
+                required: true
+              link:
+                options:
+                  - page
+                  - url
+              anchorToggle: false
+              anchor: false
+              target: false
+              classnames: false
+            help: >
+              Dieser Link wird im Footer des Cookie Modals angezeigt.

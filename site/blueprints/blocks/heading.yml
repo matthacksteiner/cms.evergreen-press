@@ -1,0 +1,22 @@
+name: field.blocks.heading.name
+icon: title
+wysiwyg: true
+preview: heading
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      text:
+        label: field.blocks.heading.text
+        type: writer
+        marks: false
+        nodes: false
+        inline: true
+        width: 5/6
+        placeholder: field.blocks.heading.placeholder
+  settings:
+    label: Einstellungen
+    fields:
+      titleGroup: groups/titleGroup
+      meta: fields/metadata

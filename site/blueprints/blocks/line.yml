@@ -1,0 +1,32 @@
+name: field.blocks.line.name
+icon: dots
+preview: line
+wysiwyg: true
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      info:
+        label: Info
+        type: info
+        text: >
+          Alle Einstellungen sind im Einstellungs Tab zu finden.
+  settings:
+    label: Einstellungen
+    fields:
+      borderStyle:
+        label: Linienstil
+        type: select
+        width: 1/3
+        default: solid
+        options:
+          solid: durchgehend
+          dashed: strich
+          dotted: punktiert
+          double: doppelt
+      borderWidth:
+        extends: fields/borderWidth
+      borderColor:
+        extends: fields/borderColor
+      meta: fields/metadata

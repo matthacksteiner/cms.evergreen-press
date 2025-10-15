@@ -1,0 +1,100 @@
+Title: Bild
+accept: image/jpeg, image/png, image/webp
+create:
+  width: 2560
+  height: 2560
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      alt:
+        type: text
+        label: Alternativ Text
+        width: 1/3
+        help: Alternativer Text für Benutzer mit eingeschränkter Sehkraft und bei Ladefehler.
+      identifier:
+        type: text
+        label: ID
+        width: 1/3
+        help: ID für CSS
+      classes:
+        type: text
+        label: CSS Klasse
+        width: 1/3
+        help: Zusätzliche CSS-Klassen. Durch ein Leerzeichen trennen.
+  settings:
+    label: Einstellungen
+    columns:
+      - width: 1/4
+        fields:
+          captionToggle:
+            label: Beschriftung?
+            type: toggle
+            default: false
+          captionObject:
+            extends: fields/captionObject
+      - width: 1/4
+        fields:
+          lightbox:
+            label: Lightbox?
+            type: toggle
+            width: 1/2
+            default: false
+            when:
+              linkToggle: false
+            help: Bild in Lightbox öffnen (nicht kompatibel mit Link)
+      - width: 1/4
+        fields:
+          linkToggle:
+            label: Link?
+            type: toggle
+            width: 1/2
+            default: false
+            when:
+              lightbox: false
+            help: Link hinzufügen (nicht kompatibel mit Lightbox)
+          linkExternal:
+            when:
+              linkToggle: true
+            extends: fields/linkField
+            fields:
+              link:
+                options:
+                  - page
+                  - url
+      - width: 1/4
+        fields:
+          copyrightToggle:
+            label: Copyright?
+            type: toggle
+            default: false
+          copyrightObject:
+            type: object
+            label: Copyright Optionen
+            icon: palette
+            when:
+              copyrightToggle: true
+            fields:
+              copyrightTitle:
+                label: Title
+                type: text
+                width: 4/6
+              copyrightOptions:
+                label: Text Optionen
+                extends: groups/textGroup
+                fields:
+                  textAlign: false
+              copyrightBackground:
+                label: Hintergrundfarbe
+                extends: fields/fontColor
+              copyrightPosition:
+                label: Position
+                type: select
+                width: 1/4
+                options:
+                  topleft: Oben Links
+                  topright: Oben Rechts
+                  bottomleft: Unten Links
+                  bottomright: Unten Rechts
+                default: topright

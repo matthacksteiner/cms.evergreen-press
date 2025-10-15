@@ -1,0 +1,46 @@
+name: Navigation (Sektion)
+icon: anchor
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      previousToggle:
+        label: Vorheriger Link anzeigen
+        type: toggle
+        default: true
+        width: 1/2
+      nextToggle:
+        label: Nächster Link anzeigen
+        type: toggle
+        default: true
+        width: 1/2
+      previousLabel:
+        label: Text für "Vorheriges Projekt"
+        type: text
+        default: "← Vorheriges Projekt"
+        when:
+          previousToggle: true
+        width: 1/2
+      nextLabel:
+        label: Text für "Nächstes Projekt"
+        type: text
+        default: "Nächstes Projekt →"
+        when:
+          nextToggle: true
+        width: 1/2
+
+  settings:
+    label: Einstellungen
+    fields:
+      info:
+        label: Info
+        type: info
+        text: |
+          Diese Navigation ermöglicht es Benutzern, zwischen Seiten innerhalb derselben Sektion zu navigieren.
+      navigationLine:
+        type: line
+      buttonLocal:
+        extends: groups/buttonGroup
+        label: Button Styling
+      meta: fields/metadata

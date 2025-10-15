@@ -1,0 +1,39 @@
+type: object
+label: Link Objekt
+fields:
+  link:
+    type: link
+    label: Link
+    required: true
+    options:
+      - page
+      - url
+      - file
+      - email
+      - tel
+    width: 1/2
+  linkText:
+    type: text
+    label: Text
+    width: 2/6
+    required: true
+  target:
+    label: Neues Fenster?
+    type: toggle
+    width: 1/6
+  anchorToggle:
+    type: toggle
+    label: Anker Link?
+    width: 1/6
+  anchor:
+    type: link
+    label: Anker
+    width: 5/6
+    when:
+      anchorToggle: true
+    options:
+      - anchor
+
+  classnames:
+    label: CSS Klassen
+    type: text

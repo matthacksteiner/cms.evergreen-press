@@ -1,0 +1,21 @@
+{
+	"name": "getkirby/baukasten",
+	"description": "baukasten Kirby Dev Kit",
+	"require": {
+		"php": ">=8.1",
+		"getkirby/cms": "^5",
+		"microman/kirby-column-blocks": "^1.2.1",
+		"getkirby/cli": "^1.5",
+		"bnomei/kirby3-janitor": "^4.3",
+		"sylvainjule/backups": "^1.0",
+		"johannschopplich/kirby-deploy-trigger": "^1.0",
+		"tobimori/kirby-thumbhash": "^1.1",
+		"bnomei/kirby3-dotenv": "^5.0",
+		"medienbaecker/kirby-alter": "^1.7"
+	},
+	"config": {
+		"allow-plugins": {
+			"getkirby/composer-installer": true
+		}
+	}
+}

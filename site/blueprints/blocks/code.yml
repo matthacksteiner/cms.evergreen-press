@@ -1,0 +1,15 @@
+name: Code
+icon: code
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      code:
+        type: textarea
+        label: Code
+        required: true
+        size: large
+        buttons: false
+        placeholder: "<h1>Hello World</h1>"
+      meta: fields/metadata

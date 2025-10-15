@@ -1,0 +1,79 @@
+:root {
+	--color-background: #f3f3f4;
+}
+
+.k-tabs {
+	gap: 2rem;
+}
+
+.k-header::before {
+	float: right;
+	content: "";
+	margin-top: 10px;
+	width: 150px;
+	height: 35px;
+	background-repeat: no-repeat;
+	background-size: contain;
+	clear: right;
+}
+
+.k-items[data-layout="cards"] .k-item-image .k-icon {
+	--icon-size: 64px;
+}
+
+.k-items[data-layout="cardlets"] .k-item-image .k-icon {
+	--icon-size: 48px;
+}
+
+.k-login-view form {
+	padding-top: 48px;
+}
+
+.k-login-fields {
+	margin-top: 2rem;
+}
+
+/* default light theme */
+.k-header::before {
+	background-image: url("../img/baukasten-logo.svg");
+}
+.k-login-view form::before {
+	content: url("../img/baukasten-logo.svg");
+}
+
+/* dark mode preference */
+@media (prefers-color-scheme: dark) {
+	.k-header::before {
+		background-image: url("../img/baukasten-logo-white.svg");
+	}
+	.k-login-view form::before {
+		content: url("../img/baukasten-logo-white.svg");
+	}
+}
+
+/* kirby theme switcher overrides */
+[data-theme="dark"] .k-header::before {
+	background-image: url("../img/baukasten-logo-white.svg");
+}
+[data-theme="dark"] .k-login-view form::before {
+	content: url("../img/baukasten-logo-white.svg");
+}
+
+[data-theme="light"] .k-header::before {
+	background-image: url("../img/baukasten-logo.svg");
+}
+[data-theme="light"] .k-login-view form::before {
+	content: url("../img/baukasten-logo.svg");
+}
+
+/* Webhook K4 fix */
+.pju-webhook--btn {
+	display: flex;
+	padding: 1.75em 1.5em 1.875em;
+}
+
+/* Previews  */
+.k-block-container-type-gallery .k-image,
+.k-block-figure-container .k-image {
+	min-height: 50px;
+}

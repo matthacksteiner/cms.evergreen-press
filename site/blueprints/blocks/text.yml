@@ -1,0 +1,26 @@
+name: field.blocks.text.name
+icon: text
+wysiwyg: true
+preview: text
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      text:
+        type: writer
+        extends: fields/writer
+        nodes:
+          - heading
+          - bulletList
+          - orderedList
+        placeholder: field.blocks.text.placeholder
+  settings:
+    label: Einstellungen
+    fields:
+      textHeadline:
+        label: Text Einstellungen
+        type: headline
+        numbered: false
+      textGroup: groups/textGroup
+      meta: fields/metadata

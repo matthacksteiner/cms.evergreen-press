@@ -1,0 +1,7 @@
+label: Beschriftung
+type: select
+default: bottom
+width: 2/6
+options:
+  center: Zentriert
+  bottom: Unterhalb

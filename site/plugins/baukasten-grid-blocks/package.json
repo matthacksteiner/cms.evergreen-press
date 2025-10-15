@@ -1,0 +1,17 @@
+{
+	"name": "baukasten-grid-blocks",
+	"version": "1.0.0",
+	"description": "Use layouts field as block for Baukasten CMS",
+	"main": "index.js",
+	"scripts": {
+		"dev": "parcel watch src/index.js --no-source-maps --no-hmr -d ./",
+		"build": "parcel build src/index.js --no-source-maps --no-cache -d ./"
+	},
+	"keywords": [
+		"kirby-plugin",
+		"kirby-cms",
+		"kirby-field"
+	],
+	"author": "Matthias Hacksteiner",
+	"license": "MIT"
+}

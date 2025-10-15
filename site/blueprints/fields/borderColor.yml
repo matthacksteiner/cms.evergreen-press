@@ -1,0 +1,6 @@
+label: Rahmen Farbe
+width: 1/3
+type: select
+default: black
+required: true
+extends: fields/colors

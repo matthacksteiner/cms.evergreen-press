@@ -1,0 +1,9 @@
+label: Dokumente
+type: files
+
+accept: application/pdf, application/doc
+
+fields:
+  alt:
+    label: Alt Text
+    type: text

@@ -1,0 +1,32 @@
+{
+	"name": "baukasten/grid-blocks",
+	"description": "A grid-based layout plugin for the Baukasten Kirby CMS that provides flexible grid block functionality with Vue.js components and responsive design capabilities.",
+	"type": "kirby-plugin",
+	"license": "MIT",
+	"version": "1.0.0",
+	"authors": [
+		{
+			"name": "Baukasten Team",
+			"email": "contact@matthiashacksteiner.net"
+		}
+	],
+	"require": {
+		"getkirby/composer-installer": "^1.2",
+		"getkirby/cms": "^3.7"
+	},
+	"extra": {
+		"installer-name": "baukasten-grid-blocks"
+	},
+	"config": {
+		"optimize-autoloader": true
+	},
+	"keywords": [
+		"kirby",
+		"cms",
+		"grid",
+		"layout",
+		"baukasten",
+		"vue",
+		"responsive"
+	]
+}

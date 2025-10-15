@@ -1,0 +1,32 @@
+{
+	"name": "baukasten/kirby-routes",
+	"description": "A routes visualization plugin for the Baukasten Kirby CMS that provides a comprehensive overview of all available routes in your Kirby setup.",
+	"type": "kirby-plugin",
+	"license": "MIT",
+	"version": "1.0.0",
+	"authors": [
+		{
+			"name": "Baukasten Team",
+			"email": "contact@matthiashacksteiner.net"
+		}
+	],
+	"require": {
+		"getkirby/composer-installer": "^1.2",
+		"getkirby/cms": "^3.7"
+	},
+	"extra": {
+		"installer-name": "baukasten-kirby-routes"
+	},
+	"config": {
+		"optimize-autoloader": true
+	},
+	"keywords": [
+		"kirby",
+		"cms",
+		"routes",
+		"visualization",
+		"baukasten",
+		"debugging",
+		"documentation"
+	]
+}

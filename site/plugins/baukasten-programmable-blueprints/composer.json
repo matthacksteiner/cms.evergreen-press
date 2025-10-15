@@ -1,0 +1,32 @@
+{
+	"name": "baukasten/programmable-blueprints",
+	"description": "A dynamic blueprint generation plugin for the Baukasten Kirby CMS that provides role-based blueprint loading and programmable blueprint functionality.",
+	"type": "kirby-plugin",
+	"license": "MIT",
+	"version": "1.0.0",
+	"authors": [
+		{
+			"name": "Baukasten Team",
+			"email": "contact@matthiashacksteiner.net"
+		}
+	],
+	"require": {
+		"getkirby/composer-installer": "^1.2",
+		"getkirby/cms": "^3.7"
+	},
+	"extra": {
+		"installer-name": "baukasten-programmable-blueprints"
+	},
+	"config": {
+		"optimize-autoloader": true
+	},
+	"keywords": [
+		"kirby",
+		"cms",
+		"blueprints",
+		"dynamic",
+		"baukasten",
+		"roles",
+		"permissions"
+	]
+}

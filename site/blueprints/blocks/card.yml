@@ -1,0 +1,213 @@
+name: Karte
+icon: copy
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      # Content Fields
+      title:
+        label: Titel
+        extends: fields/writer
+        marks: false
+        nodes: false
+        inline: true
+        placeholder: field.blocks.heading.placeholder
+        width: 3/4
+      image:
+        label: SVG Icon
+        type: files
+        icon: image
+        layout: list
+        width: 1/4
+        multiple: false
+        back: white
+        query: page.images.filterBy('extension', 'svg')
+        uploads:
+          template: svg
+
+      text:
+        label: Text
+        extends: fields/writer
+        marks: false
+        nodes: false
+        inline: true
+        placeholder: field.blocks.text.placeholder
+
+      # Category Selection
+      hoverToggle:
+        type: toggle
+        label: Enable Hover Text
+        width: 1/2
+        text:
+          - "No"
+          - "Yes"
+
+      linkToggle:
+        type: toggle
+        label: Enable Link
+        width: 1/2
+        text:
+          - "No"
+          - "Yes"
+
+      hovertext:
+        type: writer
+        extends: fields/writer
+        marks: false
+        nodes: false
+        inline: true
+        placeholder: field.blocks.text.placeholder
+        when:
+          hoverToggle: true # Shown only if "Enable Hover" is toggled ON
+
+      linkObject:
+        extends: fields/linkField
+        when:
+          linkToggle: true # Shown only if "Enable Link" is toggled ON
+
+  settings:
+    label: Einstellungen
+    fields:
+      # Display Settings
+      displayHeadline:
+        label: Darstellung
+        type: headline
+        numbered: false
+      aspectRatio:
+        label: Seitenverhältnis
+        type: select
+        placeholder: false
+        width: 1/2
+        required: true
+        default: 1/1
+        options:
+          1/1: "1:1"
+          3/2: "3:2"
+          4/3: "4:3"
+          5/4: "5:4"
+          16/9: "16:9"
+          21/9: "21:9"
+          2/3: "2:3"
+          3/4: "3:4"
+          4/5: "4:5"
+          1/2: "1:2"
+      justify:
+        label: Ausrichtung
+        extends: fields/adjust
+        options:
+          two: "2 + 1 Elemente"
+          one: "1 + 2 Elemente"
+        width: 1/2
+
+      # Title Settings
+      titleHeadline:
+        label: Titel Einstellungen
+        type: headline
+        numbered: false
+      titleGroup:
+        extends: groups/titleGroup
+        fields:
+          titleColor: false
+
+      # Text Settings
+      textHeadline:
+        label: Text Einstellungen
+        type: headline
+        numbered: false
+      textGroup:
+        extends: groups/textGroup
+        fields:
+          textColor: false
+
+      # Icon Settings
+      sizeHeadline:
+        label: Icon Einstellungen
+        type: headline
+        numbered: false
+      widthMobile:
+        label: Größe 📱
+        extends: fields/width
+      widthDesktop:
+        label: Größe 🖥️
+        extends: fields/width
+      widthAlign:
+        label: Ausrichtung
+        extends: fields/align
+        width: 1/4
+
+      # Color Settings
+      colorsHeadline:
+        label: Farben Einstellungen
+        type: headline
+        numbered: false
+
+      # Background Colors
+      cardBackgroundColor:
+        label: Farbe Hintergrund
+        type: select
+        default: primary
+        extends: fields/colors
+        width: 1/2
+      cardBackgroundColorActive:
+        label: Farbe Hintergrund Hover
+        type: select
+        default: primary
+        extends: fields/colors
+        width: 1/2
+
+      # Text Colors
+      cardTextColor:
+        label: Farbe Text
+        type: select
+        default: secondary
+        extends: fields/colors
+        width: 1/2
+      cardTextColorActive:
+        label: Farbe Text Hover
+        type: select
+        default: secondary
+        extends: fields/colors
+        width: 1/2
+
+      # Border Colors
+      cardBorderColor:
+        label: Rand Farbe
+        type: select
+        default: primary
+        extends: fields/colors
+        width: 1/2
+      cardBorderColorActive:
+        label: Rand Farbe Hover
+        type: select
+        default: primary
+        extends: fields/colors
+        width: 1/2
+
+      # Border Settings
+      cardBorderHeadline:
+        label: Rand Einstellungen
+        type: headline
+        numbered: false
+      cardBorderWidth:
+        label: Randbreite
+        type: number
+        placeholder: 0
+        width: 1/4
+      cardBorderRadius:
+        label: Randradius
+        type: number
+        placeholder: 0
+        width: 1/4
+      cardBorderPaddingDesktop:
+        label: Randabstand 🖥️
+        type: number
+        placeholder: 0
+        width: 1/4
+      cardBorderPaddingMobile:
+        label: Randabstand 📱
+        type: number
+        placeholder: 0
+        width: 1/4
+
+      meta: fields/metadata

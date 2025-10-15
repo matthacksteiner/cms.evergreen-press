@@ -1,0 +1,32 @@
+{
+	"name": "baukasten/layouts",
+	"description": "A layout processing plugin for the Baukasten Kirby CMS that converts Kirby layouts into structured arrays for frontend consumption.",
+	"type": "kirby-plugin",
+	"license": "MIT",
+	"version": "1.0.0",
+	"authors": [
+		{
+			"name": "Baukasten Team",
+			"email": "contact@matthiashacksteiner.net"
+		}
+	],
+	"require": {
+		"getkirby/composer-installer": "^1.2",
+		"getkirby/cms": "^3.7"
+	},
+	"extra": {
+		"installer-name": "baukasten-layouts"
+	},
+	"config": {
+		"optimize-autoloader": true
+	},
+	"keywords": [
+		"kirby",
+		"cms",
+		"layouts",
+		"processing",
+		"baukasten",
+		"columns",
+		"frontend"
+	]
+}

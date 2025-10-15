@@ -1,0 +1,159 @@
+name: Video
+icon: video
+preview: video
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      source:
+        type: toggles
+        label: Video Quelle
+        options:
+          - value: remote
+            text: Externer Link
+            icon: url
+          - value: local
+            text: Video Datei
+            icon: file
+      url:
+        label: field.blocks.video.url.label
+        type: url
+        placeholder: field.blocks.video.url.placeholder
+        help: |
+          Unterstützte Video-Quellen:
+          - YouTube (Format: https://www.youtube.com/watch?v=vH1poPSIvOk oder https://youtu.be/vH1poPSIvOk)
+          - Vimeo (Format: https://vimeo.com/22775048)
+          - Cloudinary (Format: https://res.cloudinary.com/demo/video/upload/v1612345678/sample.mp4)
+        when:
+          source: remote
+      caption: false
+      file:
+        label: Video-Datei
+        type: files
+        query: page.videos.filterBy('extension', 'mp4')
+        multiple: false
+        uploads:
+          template: video
+        when:
+          source: local
+  settings:
+    label: Einstellungen
+    fields:
+      ratioHeadline:
+        label: Seitenverhältnis
+        type: headline
+        numbered: false
+      ratioMobile:
+        extends: fields/ratio
+        label: Seitenverhältnis 📱
+        width: 1/2
+        when:
+          source: remote
+      ratio:
+        extends: fields/ratio
+        label: Seitenverhältnis 🖥️
+        width: 1/2
+        when:
+          source: remote
+      info:
+        label: Info
+        type: info
+        width: 1/1
+        text: "Für externe Videosquellen kann nicht Original verwendet werden."
+        when:
+          source: remote
+      width:
+        label: Breite
+        type: number
+        width: 1/2
+        help: Breite des Videos in Pixeln
+        when:
+          source: local
+      height:
+        label: Höhe
+        type: number
+        width: 1/2
+        help: Höhe des Videos in Pixeln
+        when:
+          source: local
+      optionsHeadline:
+        label: Wiedergabe
+        type: headline
+        numbered: false
+      thumbnail:
+        label: Cover
+        type: files
+        help: "Das Bild sollte die gleiche Größe wie das Video haben."
+        uploads:
+          template: pixel
+      options:
+        type: checkboxes
+        label: Optionen
+        width: 1/1
+        columns: 5
+        default:
+          - autoplay
+          - loop
+          - muted
+        options:
+          autoplay: Autoplay
+          loop: Loop
+          muted: Stumm
+          controls: Steuerung
+          full: Vollbild
+        help: "Auotplay deaktiviert den Ton bei der Wiedergabe."
+      textHeadline:
+        label: Text
+        type: headline
+        numbered: false
+      toggle:
+        label: Text?
+        type: toggle
+        default: false
+        width: 1/6
+      level:
+        label: field.blocks.heading.level
+        type: select
+        empty: false
+        default: "h2"
+        width: 1/6
+        options:
+          - h1
+          - h2
+          - h3
+          - h4
+          - h5
+          - h6
+        when:
+          toggle: true
+      caption:
+        label: Title
+        type: text
+        width: 4/6
+        when:
+          toggle: true
+      captionOptions:
+        label: Text Optionen
+        extends: groups/textGroup
+        fields:
+          textFont:
+            extends: fields/fontFile
+            when:
+              toggle: true
+          textSize:
+            extends: fields/fontSize
+            when:
+              toggle: true
+          textColor:
+            extends: fields/fontColor
+            when:
+              toggle: true
+          textAlign:
+            extends: fields/fontAlign
+            fields:
+              default: center
+            when:
+              toggle: true
+      loading: fields/loading
+      meta: fields/metadata

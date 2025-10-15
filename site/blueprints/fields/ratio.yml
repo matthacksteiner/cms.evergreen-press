@@ -1,0 +1,17 @@
+type: select
+placeholder: false
+default: original
+width: 1/2
+required: true
+options:
+  original: "Original"
+  1/1: "1:1"
+  3/2: "3:2"
+  4/3: "4:3"
+  5/4: "5:4"
+  16/9: "16:9"
+  21/9: "21:9"
+  2/3: "2:3"
+  3/4: "3:4"
+  4/5: "4:5"
+  1/2: "1:2"

@@ -1,0 +1,30 @@
+name: Abstände
+icon: divider
+preview: divider
+wysiwyg: true
+
+fields:
+  spacingMobileTop:
+    label: ⬆️ 📱
+    type: number
+    after: px
+    width: 1/4
+    placeholder: 0
+  spacingMobileBottom:
+    label: ⬇️ 📱
+    type: number
+    after: px
+    width: 1/4
+    placeholder: 0
+  spacingDesktopTop:
+    label: ⬆️ 🖥️
+    type: number
+    after: px
+    width: 1/4
+    placeholder: 0
+  spacingDesktopBottom:
+    label: ⬇️ 🖥️
+    type: number
+    after: px
+    width: 1/4
+    placeholder: 0

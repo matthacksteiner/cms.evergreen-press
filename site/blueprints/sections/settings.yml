@@ -1,0 +1,61 @@
+columns:
+  settingsNav:
+    width: 1/1
+    sections:
+      nav:
+        type: fields
+        fields:
+          navHeadline:
+            label: Navigations Menüs
+            type: headline
+            numbered: false
+          navHeader:
+            width: 1/2
+            type: structure
+            label: Header
+            fields:
+              linkObject:
+                extends: fields/linkField
+                fields:
+                  link:
+                    options:
+                      - page
+                      - url
+                  classnames:
+                    label: CSS Klassen
+                    type: text
+                    help: Nutze die Klasse 'cta', um den Link in einen Button zu ändern.
+
+          navHambuger:
+            width: 1/2
+            type: structure
+            label: Hamburger
+            fields:
+              linkObject:
+                extends: fields/linkField
+                fields:
+                  link:
+                    options:
+                      - page
+                      - url
+
+          line1:
+            width: 1/1
+            type: line
+  settingsFooter:
+    width: 1/1
+    sections:
+      footerHeadline:
+        type: fields
+        fields:
+          footerHeadline:
+            label: Footer
+            type: headline
+            numbered: false
+      footerContent:
+        type: fields
+        fields:
+          layoutFooter:
+            label: Layout
+            extends: fields/layout
+            settings: tabs/config

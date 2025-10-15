@@ -1,0 +1,33 @@
+label: Medien
+icon: image
+sections:
+  files:
+    headline: Bilder
+    type: files
+    layout: cardlets
+    template: pixel
+    query: page.images
+  filesSlider:
+    headline: Bilder Slider
+    type: files
+    layout: cardlets
+    template: slider
+    query: page.images
+  vector:
+    headline: Vektorgrafiken
+    type: files
+    layout: list
+    template: svg
+    query: page.images.filterBy('extension', 'svg')
+  videos:
+    headline: Videos
+    type: files
+    layout: list
+    template: video
+    query: page.videos
+  documents:
+    headline: Dokumente
+    type: files
+    layout: list
+    template: docs
+    query: page.documents

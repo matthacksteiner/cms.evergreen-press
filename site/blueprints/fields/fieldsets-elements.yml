@@ -1,0 +1,11 @@
+label: Elemente
+type: group
+fieldsets:
+  button: blocks/button
+  buttonBar: blocks/buttonBar
+  accordion: blocks/accordion
+  iconlist: blocks/iconlist
+  card: blocks/card
+  menu: blocks/menu
+  contactForm: blocks/contactForm
+  featured: blocks/featured

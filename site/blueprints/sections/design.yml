@@ -1,0 +1,762 @@
+columns:
+  designColors:
+    width: 1/2
+    sections:
+      colors:
+        type: fields
+        fields:
+          colorHeadline:
+            label: Farben
+            type: headline
+            numbered: true
+            translate: false
+          colorPrimary:
+            type: color
+            label: Primäre Farbe
+            width: 1/3
+            translate: false
+          colorSecondary:
+            type: color
+            label: Sekundäre Farbe
+            width: 1/3
+            translate: false
+          colorTertiary:
+            type: color
+            label: Teritäre Farbe
+            width: 1/3
+            translate: false
+          colorBlack:
+            type: color
+            label: Schwarz
+            width: 1/3
+            translate: false
+          colorWhite:
+            type: color
+            label: Weiß
+            width: 1/3
+            translate: false
+          colorBackground:
+            label: Hintergrundfarbe
+            type: select
+            width: 1/3
+            translate: false
+            default: white
+            extends: fields/colors
+  designGrid:
+    width: 1/2
+    sections:
+      grid:
+        type: fields
+        fields:
+          gridHeadline:
+            label: Grid
+            type: headline
+            numbered: true
+            translate: false
+          gridGapMobile:
+            label: Abstand 📱
+            type: number
+            width: 1/3
+            placeholder: 20
+            after: px
+            translate: false
+          gridMarginMobile:
+            label: Rand 📱
+            type: number
+            width: 1/3
+            placeholder: 20
+            after: px
+            translate: false
+          gridBlockMobile:
+            label: Abstand Blöcke 📱
+            type: number
+            width: 1/3
+            placeholder: 16
+            after: px
+            translate: false
+          gridGapDesktop:
+            label: Abstand 🖥️
+            type: number
+            width: 1/3
+            placeholder: 40
+            after: px
+            translate: false
+          gridMarginDesktop:
+            label: Rand 🖥️
+            type: number
+            width: 1/3
+            placeholder: 40
+            after: px
+            translate: false
+          gridBlockDesktop:
+            label: Abstand Blöcke 🖥️
+            type: number
+            width: 1/3
+            placeholder: 16
+            after: px
+            translate: false
+
+  designFavicon:
+    width: 1/1
+    sections:
+      favicon:
+        type: fields
+        fields:
+          faviconHeadline:
+            label: Favicon
+            type: headline
+            numbered: true
+            translate: false
+          faviconFiles:
+            type: object
+            label: Dateien
+            icon: file
+            toggle: true
+            translate: false
+            help: Die Dateien können auf https://realfavicongenerator.net/ generiert werden.
+            fields:
+              faviconFileSvg:
+                label: SVG Datei
+                type: files
+                help: Erlaubtes Format - SVG
+                query: site.files.filterBy('template', 'svg')
+                uploads:
+                  template: svg
+                multiple: false
+                width: 1/3
+                translate: false
+              faviconFileIco:
+                label: ICO Datei
+                type: files
+                help: Erlaubtes Format - ICO
+                query: site.files.filterBy('extension', 'ico')
+                uploads:
+                  template: ico
+                multiple: false
+                width: 1/3
+                translate: false
+              faviconFileGap:
+                type: gap
+                width: 1/3
+              faviconFilePng1:
+                label: PNG Datei 192x192
+                type: files
+                help: Erlaubtes Format - PNG
+                query: site.files.filterBy('template', 'png')
+                maxheight: 192
+                maxwidth: 192
+                minheight: 192
+                minwidth: 192
+                uploads:
+                  template: png
+                multiple: false
+                width: 1/3
+                translate: false
+              faviconFilePng2:
+                label: PNG Datei 512x512
+                type: files
+                help: Erlaubtes Format - PNG
+                maxheight: 512
+                maxwidth: 512
+                minheight: 512
+                minwidth: 512
+                query: site.files.filterBy('template', 'png')
+                uploads:
+                  template: png
+                multiple: false
+                width: 1/3
+                translate: false
+              faviconFilePng3:
+                label: PNG Datei 180x180 Apple Touch Icon
+                type: files
+                help: Erlaubtes Format - PNG
+                maxheight: 180
+                maxwidth: 180
+                minheight: 180
+                minwidth: 180
+                query: site.files.filterBy('template', 'png')
+                uploads:
+                  template: png
+                multiple: false
+                width: 1/3
+                translate: false
+  designHeader:
+    width: 1/1
+    sections:
+      header:
+        type: fields
+        fields:
+          headerHeadline:
+            label: Header
+            type: headline
+            numbered: true
+            translate: false
+          headerActive:
+            label: Header anzeigen
+            type: toggle
+            default: true
+            width: 1/6
+            translate: false
+          headerGap:
+            type: gap
+            width: 5/6
+          headerLogo:
+            type: object
+            label: Logo
+            icon: file-image
+            toggle: true
+            width: 1/3
+            translate: false
+            when:
+              headerActive: true
+            fields:
+              logoFile:
+                label: Datei
+                type: files
+                help: Erlaubtes Format - SVG
+                query: site.files.filterBy('template', 'svg')
+                uploads:
+                  template: svg
+                multiple: false
+                width: 4/6
+                translate: false
+              logoAlign:
+                label: Ausrichtung
+                type: select
+                default: left
+                options:
+                  left: Links
+                  center: Zentriert
+                width: 2/6
+                translate: false
+              logoMobile:
+                label: Breite 📱
+                type: number
+                placeholder: 200
+                after: px
+                width: 1/4
+                translate: false
+              logoMobileActive:
+                label: Breite Aktiv 📱
+                type: number
+                placeholder: 100
+                after: px
+                width: 1/4
+                translate: false
+              logoDesktop:
+                label: Breite 🖥️
+                type: number
+                placeholder: 400
+                after: px
+                width: 1/4
+                translate: false
+              logoDesktopActive:
+                label: Breite Aktiv 🖥️
+                type: number
+                placeholder: 200
+                after: px
+                width: 1/4
+                translate: false
+              logoCta:
+                label: CTA Button
+                extends: fields/linkField
+                translate: false
+                when:
+                  logoAlign: center
+          headerMenu:
+            type: object
+            label: Menü
+            icon: dots
+            width: 1/3
+            toggle: true
+            translate: false
+            when:
+              headerActive: true
+            fields:
+              typographyHeadline:
+                label: Typografie
+                type: headline
+              headerFont:
+                label: Schriftart
+                type: select
+                width: 1/2
+                translate: false
+                options:
+                  type: query
+                  query: site.fontFile.toStructure
+                  text: "{{ structureItem.name}}"
+                  value: "{{ structureItem.name}}"
+              headerFontSize:
+                label: Schriftgröße
+                type: select
+                width: 1/2
+                translate: false
+                options:
+                  type: query
+                  query: site.fontSize.toStructure
+                  text: "{{ structureItem.name}}"
+                  value: "{{ structureItem.name}}"
+              colorsHeadline:
+                label: Farben
+                type: headline
+              headerColor:
+                label: Text Normal
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/2
+                translate: false
+                help: Textfarbe der Navigation im normalen Zustand
+              headerColorActive:
+                label: Text Aktiv
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/2
+                translate: false
+                help: Textfarbe der Navigation beim Scrollen
+              headerBackground:
+                label: Hintergrund Normal
+                type: select
+                default: secondary
+                extends: fields/colors
+                width: 1/2
+                translate: false
+                help: Hintergrundfarbe des Headers im normalen Zustand
+              headerBackgroundActive:
+                label: Hintergrund Aktiv
+                type: select
+                default: secondary
+                extends: fields/colors
+                width: 1/2
+                translate: false
+                help: Hintergrundfarbe des Headers beim Scrollen
+              currentPageHeadline:
+                label: Aktuelle Seite
+                type: headline
+              headerColorCurrent:
+                label: Text aktuell Normal
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/2
+                translate: false
+                help: Textfarbe für aktive Navigationselemente
+              headerColorCurrentActive:
+                label: Text aktuell Aktiv
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/2
+                translate: false
+                help: Textfarbe für aktive Navigationselemente beim Scrollen
+          headerHamburger:
+            type: object
+            label: Hamburger
+            icon: menu
+            width: 1/3
+            translate: false
+            toggle: true
+            when:
+              headerActive: true
+            fields:
+              hamburgerTypographyHeadline:
+                label: Typografie
+                type: headline
+              hamburgerFont:
+                label: Schriftart
+                type: select
+                width: 1/2
+                translate: false
+                options:
+                  type: query
+                  query: site.fontFile.toStructure
+                  text: "{{ structureItem.name}}"
+                  value: "{{ structureItem.name}}"
+              hamburgerFontSize:
+                label: Schriftgröße
+                type: select
+                width: 1/2
+                translate: false
+                options:
+                  type: query
+                  query: site.fontSize.toStructure
+                  text: "{{ structureItem.name}}"
+                  value: "{{ structureItem.name}}"
+              hamburgerColorsHeadline:
+                label: Menü Farben
+                type: headline
+              hamburgerFontColor:
+                label: Text
+                type: select
+                width: 1/2
+                translate: false
+                default: primary
+                extends: fields/colors
+                help: Textfarbe der mobilen Navigation
+              hamburgerOverlay:
+                label: Overlay
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/2
+                translate: false
+                help: Hintergrundfarbe des mobilen Menüs
+              hamburgerMenuColor:
+                label: Icon Normal
+                type: select
+                width: 1/2
+                translate: false
+                default: primary
+                extends: fields/colors
+                help: Farbe des Hamburger-Icons im normalen Zustand
+              hamburgerMenuColorActive:
+                label: Icon Aktiv
+                type: select
+                width: 1/2
+                translate: false
+                default: primary
+                extends: fields/colors
+                help: Farbe des Hamburger-Icons beim Scrollen
+              hamburgerCurrentHeadline:
+                label: Aktuelle Seite
+                type: headline
+              hamburgerFontColorCurrent:
+                label: Text aktuell Normal
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/2
+                translate: false
+                help: Textfarbe für aktive mobile Navigationselemente
+              hamburgerFontColorCurrentActive:
+                label: Text aktuell Aktiv
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/2
+                translate: false
+                help: Textfarbe für aktive mobile Navigationselemente beim Scrollen
+
+  designButton:
+    width: 1/1
+    sections:
+      button:
+        type: fields
+        fields:
+          buttonHeadline:
+            label: Globale Button Einstellungen
+            type: headline
+            numbered: true
+          buttonSettings:
+            type: object
+            label: Einstellungen
+            icon: cog
+            width: 1/2
+            translate: false
+            toggle: true
+            help: Der Abstand zum Rand wird horizontal verdoppelt.
+            fields:
+              typographyHeadline:
+                label: Typografie
+                type: headline
+              buttonFont:
+                extends: fields/fontFile
+                required: false
+                width: 1/2
+                translate: false
+              buttonFontSize:
+                extends: fields/fontSize
+                translate: false
+                width: 1/2
+              stylingHeadline:
+                label: Styling
+                type: headline
+              buttonBorderRadius:
+                label: Rand Rundung
+                type: number
+                placeholder: 0
+                after: px
+                width: 1/3
+                translate: false
+              buttonBorderWidth:
+                label: Rand Strichstärke
+                type: number
+                placeholder: 0
+                after: px
+                width: 1/3
+                translate: false
+              buttonPadding:
+                label: Abstand
+                type: number
+                placeholder: 10
+                width: 1/3
+                after: px
+                translate: false
+          buttonColors:
+            type: object
+            label: Farben
+            icon: palette
+            width: 1/2
+            toggle: true
+            translate: false
+            fields:
+              backgroundHeadline:
+                label: Hintergrund
+                type: headline
+              buttonBackgroundColor:
+                label: Normal
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/2
+                translate: false
+              buttonBackgroundColorActive:
+                label: Hover
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/2
+                translate: false
+              textHeadline:
+                label: Text
+                type: headline
+              buttonTextColor:
+                label: Normal
+                type: select
+                default: secondary
+                extends: fields/colors
+                width: 1/2
+                translate: false
+              buttonTextColorActive:
+                label: Hover
+                type: select
+                default: secondary
+                extends: fields/colors
+                width: 1/2
+                translate: false
+              borderHeadline:
+                label: Rand
+                type: headline
+              buttonBorderColor:
+                label: Normal
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/2
+                translate: false
+              buttonBorderColorActive:
+                label: Hover
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/2
+                translate: false
+  designSection:
+    width: 1/1
+    sections:
+      section:
+        type: fields
+        fields:
+          designSectionHeadline:
+            label: Sektionen Einstellungen
+            type: headline
+            numbered: true
+          designSectionToggle:
+            type: toggle
+            label: Sektionen anzeigen?
+            width: 1/6
+            default: true
+            help: Sektionen in der URL angezeigen.
+  designPagination:
+    width: 1/1
+    sections:
+      pagination:
+        type: fields
+        fields:
+          paginationHeadline:
+            label: Seitennummerierung
+            type: headline
+            numbered: true
+          paginationSettings:
+            type: object
+            translate: false
+            label: Einstellungen
+            icon: cog
+            width: 1/2
+            toggle: true
+            fields:
+              typographyHeadline:
+                label: Typografie
+                type: headline
+              paginationFont:
+                extends: fields/fontFile
+                required: false
+                width: 1/2
+                translate: false
+              paginationFontSize:
+                extends: fields/fontSize
+                translate: false
+                width: 1/2
+              stylingHeadline:
+                label: Styling
+                type: headline
+              paginationBorderRadius:
+                label: Rand Rundung
+                type: number
+                placeholder: 0
+                after: px
+                width: 1/3
+                translate: false
+              paginationBorderWidth:
+                label: Rand Strichstärke
+                type: number
+                placeholder: 0
+                after: px
+                width: 1/3
+                translate: false
+              paginationPadding:
+                label: Abstand Text zu Rand
+                type: number
+                placeholder: 10
+                width: 1/3
+                after: px
+                translate: false
+              layoutHeadline:
+                label: Layout & Abstände
+                type: headline
+              paginationMargin:
+                label: Abstand zwischen Elementen
+                type: number
+                placeholder: 10
+                width: 1/3
+                after: px
+                translate: false
+              paginationTop:
+                label: Abstand oben
+                type: number
+                placeholder: 20
+                width: 1/3
+                after: px
+                translate: false
+              paginationBottom:
+                label: Abstand unten
+                type: number
+                placeholder: 20
+                width: 1/3
+                after: px
+                translate: false
+              paginationElements:
+                label: Elemente pro Seite
+                type: select
+                default: 9
+                width: 1/3
+                options:
+                  - value: 1
+                    text: 1
+                  - value: 6
+                    text: 6
+                  - value: 9
+                    text: 9
+                  - value: 12
+                    text: 12
+                  - value: 15
+                    text: 15
+                  - value: 18
+                    text: 18
+                  - value: 21
+                    text: 21
+                  - value: 24
+                    text: 24
+                  - value: 27
+                    text: 27
+                  - value: 30
+                    text: 30
+                  - value: 33
+                    text: 33
+                  - value: 36
+                    text: 36
+                  - value: 39
+                    text: 39
+                  - value: 42
+                    text: 42
+          paginationColors:
+            type: object
+            label: Farben
+            icon: palette
+            width: 1/2
+            toggle: true
+            translate: false
+            fields:
+              textColorsHeadline:
+                label: Text
+                type: headline
+              paginationTextColor:
+                label: Normal
+                type: select
+                default: secondary
+                extends: fields/colors
+                width: 1/3
+                translate: false
+              paginationTextColorHover:
+                label: Hover
+                type: select
+                default: secondary
+                extends: fields/colors
+                width: 1/3
+                translate: false
+              paginationTextColorActive:
+                label: Aktiv
+                type: select
+                default: secondary
+                extends: fields/colors
+                width: 1/3
+                translate: false
+              backgroundColorsHeadline:
+                label: Hintergrund
+                type: headline
+              paginationBackgroundColor:
+                label: Normal
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/3
+                translate: false
+              paginationBackgroundColorHover:
+                label: Hover
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/3
+                translate: false
+              paginationBackgroundColorActive:
+                label: Aktiv
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/3
+                translate: false
+              borderColorsHeadline:
+                label: Rand
+                type: headline
+              paginationBorderColor:
+                label: Normal
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/3
+                translate: false
+              paginationBorderColorHover:
+                label: Hover
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/3
+                translate: false
+              paginationBorderColorActiv:
+                label: Aktiv
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/3
+                translate: false

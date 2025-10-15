@@ -1,0 +1,10 @@
+type: files
+label: baukastenMeta.meta.og_image.label
+help: baukastenMeta.meta.og_image.help
+multiple: false
+uploads:
+  template: meta-og-image
+query: page.images.template("meta-og-image")
+empty: baukastenMeta.meta.og_image.empty
+layout: cards
+size: tiny

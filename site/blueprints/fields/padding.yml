@@ -1,0 +1,8 @@
+type: select
+label: Abstand
+default: both
+options:
+  both: Links + Rechts
+  left: Links
+  right: Rechts
+  none: Kein Abstand

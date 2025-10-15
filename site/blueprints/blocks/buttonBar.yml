@@ -1,0 +1,31 @@
+name: Button Leiste
+icon: grid
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      buttons:
+        type: structure
+        label: Buttons
+        empty: Keine Buttons angelegt
+        fields:
+          linkObject:
+            extends: fields/linkField
+
+  settings:
+    label: Einstellungen
+    fields:
+      info:
+        label: Info
+        type: info
+        text: |
+          Die Darstellung aller Button wird im **Tab** Design festgelegt.
+      buttonAdjust:
+        extends: fields/adjust
+        width: 2/4
+      buttonLine:
+        type: line
+      buttonLocal:
+        extends: groups/buttonGroup
+      meta: fields/metadata

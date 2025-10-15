@@ -1,0 +1,40 @@
+name: Navigations Menü
+icon: menu
+wysiwyg: false
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      nav:
+        label: Footer
+        type: structure
+        fields:
+          linkObject:
+            extends: fields/linkField
+            fields:
+              linkText:
+                required: true
+
+  settings:
+    label: Einstellungen
+    fields:
+      listHeadline:
+        label: Liste
+        type: headline
+        numbered: false
+      listGap:
+        label: Listen Abstand
+        type: number
+        width: 1/3
+        default: 16
+        after: px
+      gap:
+        type: gap
+        width: 2/3
+      textHeadline:
+        label: Text
+        type: headline
+        numbered: false
+      textGroup: groups/textGroup
+      meta: fields/metadata

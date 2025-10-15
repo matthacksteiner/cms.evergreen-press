@@ -1,0 +1,33 @@
+{
+	"name": "baukasten/meta",
+	"description": "A comprehensive meta information plugin for the Baukasten Kirby CMS that handles SEO, social media, sitemap generation, and structured data for headless CMS functionality.",
+	"type": "kirby-plugin",
+	"license": "MIT",
+	"version": "1.0.0",
+	"authors": [
+		{
+			"name": "Baukasten Team",
+			"email": "contact@matthiashacksteiner.net"
+		}
+	],
+	"require": {
+		"getkirby/composer-installer": "^1.2",
+		"getkirby/cms": "^3.7"
+	},
+	"extra": {
+		"installer-name": "baukasten-meta"
+	},
+	"config": {
+		"optimize-autoloader": true
+	},
+	"keywords": [
+		"kirby",
+		"cms",
+		"meta",
+		"seo",
+		"baukasten",
+		"sitemap",
+		"opengraph",
+		"schema"
+	]
+}

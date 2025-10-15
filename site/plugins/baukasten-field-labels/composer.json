@@ -1,0 +1,32 @@
+{
+	"name": "baukasten/field-labels",
+	"description": "A field labeling plugin for the Baukasten Kirby CMS that provides enhanced field labeling and organization capabilities in the Kirby Panel.",
+	"type": "kirby-plugin",
+	"license": "MIT",
+	"version": "1.0.0",
+	"authors": [
+		{
+			"name": "Baukasten Team",
+			"email": "contact@matthiashacksteiner.net"
+		}
+	],
+	"require": {
+		"getkirby/composer-installer": "^1.2",
+		"getkirby/cms": "^3.7"
+	},
+	"extra": {
+		"installer-name": "baukasten-field-labels"
+	},
+	"config": {
+		"optimize-autoloader": true
+	},
+	"keywords": [
+		"kirby",
+		"cms",
+		"fields",
+		"labels",
+		"baukasten",
+		"panel",
+		"ui"
+	]
+}

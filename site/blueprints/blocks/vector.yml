@@ -1,0 +1,36 @@
+name: Vektorgrafik
+icon: draft
+preview: image
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      image:
+        label: SVG Bild
+        type: files
+        icon: image
+        layout: cards
+        multiple: false
+        back: white
+        query: page.images.filterBy('extension', 'svg')
+        uploads:
+          template: svg
+  settings:
+    label: Einstellungen
+    fields:
+      sizeHeadline:
+        label: Größe
+        type: headline
+        numbered: false
+      widthMobile:
+        label: Größe 📱
+        extends: fields/width
+      widthDesktop:
+        label: Größe 🖥️
+        extends: fields/width
+      widthAlign:
+        label: Ausrichtung
+        extends: fields/align
+        width: 1/4
+      meta: fields/metadata

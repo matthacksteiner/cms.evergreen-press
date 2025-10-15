@@ -1,0 +1,12 @@
+label: Text
+icon: text
+type: writer
+counter: true
+marks:
+  - bold
+  - italic
+  - underline
+  - link
+  - email
+  - sub
+  - sup

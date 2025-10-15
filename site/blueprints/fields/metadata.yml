@@ -1,0 +1,36 @@
+type: group
+fields:
+  metaLine:
+    type: line
+  metaHeadline:
+    label: Meta Daten
+    type: headline
+    numbered: false
+  metadata:
+    type: object
+    label: Meta Daten
+    icon: palette
+    help: Zusätzliche IDs, Klassen und Daten Atrribute. Durch ein Leerzeichen trennen.
+    fields:
+      identifier:
+        type: text
+        label: ID
+        width: 1/2
+      classes:
+        type: text
+        label: CSS Klassen
+        width: 1/2
+      attributes:
+        type: structure
+        label: Attribute
+        width: 1/1
+        fields:
+          attribute:
+            type: text
+            label: Attribute
+            width: 1/2
+          value:
+            type: text
+            label: Wert
+            width: 1/2
+            help: Boolean oder String

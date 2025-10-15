@@ -1,0 +1,22 @@
+.k-layout-field .k-column.k-layout-column {
+	&:after {
+		content: attr(data-width);
+		position: absolute;
+		color: var(--color-gray-400);
+		font-size: var(--font-size-tiny);
+		bottom: var(--spacing-1);
+		right: var(--spacing-1);
+	}
+}
+
+.k-layout-selector-options .k-layout-selector-option {
+	.k-column {
+		align-content: center;
+
+		&:after {
+			content: attr(data-width);
+			color: var(--color-gray-700);
+			font-size: var(--font-size-tiny);
+		}
+	}
+}

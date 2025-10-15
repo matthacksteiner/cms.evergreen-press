@@ -1,0 +1,10 @@
+label: Rahmen Stärke
+type: select
+default: 1px
+required: true
+width: 1/3
+options:
+  - 1px
+  - 2px
+  - 4px
+  - 6px

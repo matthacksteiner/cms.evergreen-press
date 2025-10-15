@@ -1,0 +1,126 @@
+fields:
+  anchorHeadline:
+    type: headline
+    label: HTML Attribute
+    numbered: false
+  anchor:
+    label: ID
+    type: text
+    help: "Anchor ID."
+    width: 1/3
+  classes:
+    label: CSS Klassen
+    type: text
+    help: "Mit Leerzeichen trennen."
+    width: 1/3
+  attributes:
+    type: structure
+    label: Attribute
+    width: 1/3
+    fields:
+      attribute:
+        type: text
+        label: Attribute
+        width: 1/2
+      value:
+        type: text
+        label: Wert
+        width: 1/2
+        help: Boolean oder String
+    help: "Erweiterte Attribute."
+  backgroundHeadline:
+    type: headline
+    label: Container
+    numbered: false
+  backgroundContainer:
+    label: Breite
+    type: toggles
+    default: container
+    width: 1/4
+    options:
+      container: Container
+      w-full: Vollbild
+  backgroundPadding:
+    extends: fields/padding
+    width: 1/4
+  backgroundContainerColor:
+    label: Farbe Container
+    type: select
+    default: transparent
+    width: 1/4
+    extends: fields/colors
+  backgroundColor:
+    type: select
+    label: Farbe Hintergrund
+    default: transparent
+    width: 1/4
+    extends: fields/colors
+  backgroundHeadline2:
+    type: headline
+    label: Ausrichtung
+    numbered: false
+  backgroundAlignVertical:
+    width: 1/4
+    label: Vert. Container ⬆️⬇️
+    extends: fields/align
+  backgroundAlignItemsVertical:
+    width: 1/4
+    label: Vert. Blöcke ⬆️⬇️
+    extends: fields/align
+  backgroundAlignHorizontal:
+    width: 1/4
+    label: Horizontal ⬅️➡️
+    extends: fields/align
+  backgroundHeight:
+    label: Höhe
+    type: select
+    width: 1/4
+    default: auto
+    options:
+      full: Vollbild
+      half: Halber Bildschirm
+      auto: Automatisch
+  backgroundArrow:
+    label: Pfeil
+    type: toggle
+    width: 1/4
+    default: false
+    options:
+      true: Anzeigen
+    when:
+      backgroundHeight: full
+  backgroundArrowColor:
+    label: Pfeil Farbe
+    type: select
+    width: 1/4
+    default: black
+    extends: fields/colors
+    when:
+      backgroundHeight: full
+  backgroundArrowSize:
+    label: Pfeil Größe
+    type: select
+    width: 1/4
+    default: 1
+    options:
+      1: Klein
+      2: Mittel
+      3: Groß
+    when:
+      backgroundHeight: full
+  spacingHeadline:
+    type: headline
+    label: Abstände
+    numbered: false
+  spacingMobileTop:
+    label: ⬆️ 📱
+    extends: fields/spacing
+  spacingMobileBottom:
+    label: ⬇️ 📱
+    extends: fields/spacing
+  spacingDesktopTop:
+    label: ⬆️ 🖥️
+    extends: fields/spacing
+  spacingDesktopBottom:
+    label: ⬇️ 🖥️
+    extends: fields/spacing

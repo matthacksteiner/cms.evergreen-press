@@ -1,0 +1,8 @@
+label: Schriftart
+type: select
+width: 1/6
+options:
+  type: query
+  query: site.fontFile.toStructure
+  text: "{{ structureItem.name}}"
+  value: "{{ structureItem.name}}"

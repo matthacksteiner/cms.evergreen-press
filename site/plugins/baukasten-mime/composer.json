@@ -1,0 +1,32 @@
+{
+	"name": "baukasten/mime",
+	"description": "A MIME type handling plugin for the Baukasten Kirby CMS that extends file type support and ensures proper MIME type recognition for various file formats.",
+	"type": "kirby-plugin",
+	"license": "MIT",
+	"version": "1.0.0",
+	"authors": [
+		{
+			"name": "Baukasten Team",
+			"email": "contact@matthiashacksteiner.net"
+		}
+	],
+	"require": {
+		"getkirby/composer-installer": "^1.2",
+		"getkirby/cms": "^3.7"
+	},
+	"extra": {
+		"installer-name": "baukasten-mime"
+	},
+	"config": {
+		"optimize-autoloader": true
+	},
+	"keywords": [
+		"kirby",
+		"cms",
+		"mime",
+		"files",
+		"baukasten",
+		"types",
+		"upload"
+	]
+}

@@ -1,0 +1,167 @@
+name: field.blocks.gallery.name
+icon: images
+preview: gallery
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      images:
+        label: field.blocks.gallery.images.label
+        type: files
+        query: model.images
+        multiple: true
+        layout: list
+        uploads:
+          template: slider
+        image:
+          ratio: 1/1
+        help: "Für weitere Optionen (Fokus, Link und Beschriftung) das Bild anklicken."
+  settings:
+    label: Einstellungen
+    fields:
+      ratioHeadline:
+        label: Seitenverhältnis
+        type: headline
+        numbered: false
+      ratioMobile:
+        extends: fields/ratio
+        label: Seitenverhältnis 📱
+      ratio:
+        extends: fields/ratio
+        label: Seitenverhältnis 🖥️
+      sliderHeadline:
+        label: Slider
+        type: headline
+        numbered: false
+      controls:
+        label: Optionen
+        type: checkboxes
+        width: 1/1
+        columns: 5
+        default:
+          - autoplay
+          - arrows
+          - dots
+        options:
+          autoplay: Autoplay
+          arrows: Navigation
+          dots: Punkte
+          line: Linie
+          full: Vollbild
+          overlay: Overlay
+          ticker: Ticker
+      color:
+        label: Farbe
+        type: select
+        width: 1/4
+        default: black
+        extends: fields/colors
+      time:
+        label: Timing
+        type: number
+        width: 1/4
+        default: 5000
+        after: ms
+      effect:
+        label: Effekt
+        type: select
+        width: 1/4
+        default: slide
+        options:
+          slide: Slide
+          fade: Fade
+      direction:
+        label: Richtung
+        type: select
+        width: 1/4
+        default: ltr
+        options:
+          rtl: Rechts nach Links
+          ltr: Links nach Rechts
+      viewMobile:
+        label: Anzahl der Bilder 📱
+        type: number
+        width: 1/4
+        default: 1
+        min: 1
+        max: 10
+        placeholder: 1
+      viewDesktop:
+        label: Anzahl der Bilder 🖥️
+        type: number
+        width: 1/4
+        default: 1
+        min: 1
+        max: 10
+        placeholder: 1
+      viewPaddingMobile:
+        label: Zwischenabstand 📱
+        type: number
+        width: 1/4
+        default: 0
+        min: 0
+        placeholder: 0
+        after: px
+      viewPaddingDesktop:
+        label: Zwischenabstand 🖥️
+        type: number
+        width: 1/4
+        default: 0
+        min: 0
+        placeholder: 0
+        after: px
+      textHeadline:
+        label: Text
+        type: headline
+        numbered: false
+      toggle:
+        label: Text?
+        type: toggle
+        default: false
+        width: 1/6
+      level:
+        label: field.blocks.heading.level
+        type: select
+        empty: false
+        default: "h2"
+        width: 1/6
+        options:
+          - h1
+          - h2
+          - h3
+          - h4
+          - h5
+          - h6
+        when:
+          toggle: true
+      caption:
+        label: Title
+        type: text
+        width: 4/6
+        when:
+          toggle: true
+      captionOptions:
+        label: Text Optionen
+        extends: groups/textGroup
+        fields:
+          textFont:
+            extends: fields/fontFile
+            when:
+              toggle: true
+          textSize:
+            extends: fields/fontSize
+            when:
+              toggle: true
+          textColor:
+            extends: fields/fontColor
+            when:
+              toggle: true
+          textAlign:
+            extends: fields/fontAlign
+            fields:
+              default: center
+            when:
+              toggle: true
+      loading: fields/loading
+      meta: fields/metadata

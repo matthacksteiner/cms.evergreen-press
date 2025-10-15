@@ -1,0 +1,29 @@
+name: Ausgewählte Elemente (Sektion)
+icon: star
+
+tabs:
+  content:
+    label: Ausgewählte Elemente
+    fields:
+      elements:
+        label: Inhalt
+        type: multiselect
+        size: small
+        options:
+          type: query
+          query: site.children.template("section").children.template("item").published
+          text: "{{ page.title }}"
+          value: "{{ page.id }}"
+
+  settings:
+    label: Einstellungen
+    icon: cog
+    fields:
+      info:
+        label: Info
+        type: info
+        text: |
+          Dieser Block ermöglicht es einzelne Elemente aus einer Sektion darzustellen.
+      sectionDisplaySettings:
+        extends: groups/sectionDisplayGroup
+      meta: fields/metadata

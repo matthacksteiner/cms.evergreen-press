@@ -1,0 +1,75 @@
+title: Site
+
+buttons:
+  - deploy-trigger
+  - languages
+  - frontend-preview
+  - frontend-open
+
+tabs:
+  pages:
+    label: Dashboard
+    icon: dashboard
+    columns:
+      main:
+        width: 2/3
+        sections:
+          contentMainDrafts:
+            headline: Entwürfe
+            type: pages
+            status: drafts
+            layout: list
+            size: small
+            templates:
+              - default
+              - section
+          contentMainUnlisted:
+            headline: Unveröffentlicht
+            type: pages
+            status: unlisted
+            layout: list
+            size: small
+            templates:
+              - default
+              - section
+          contentMain:
+            headline: Veröffentlicht
+            type: pages
+            sortable: false
+            status: listed
+            layout: cardlets
+            size: medium
+            image: icon
+            cover: true
+            templates:
+              - home
+              - default
+              - section
+            create:
+              - default
+              - section
+      sidebar:
+        width: 1/3
+        sections:
+          contentMainHome:
+            headline: Startseite
+            type: pages
+            layout: list
+            size: small
+            image: icon
+            create: false
+            templates:
+              - home
+          contentMainSpecial:
+            headline: Spezialseiten
+            type: pages
+            layout: list
+            status: unlisted
+            size: small
+            image: icon
+            create: false
+            help: >
+              Konfiguration über die deutschen Seite.
+            templates:
+              - error
+              - maintenance

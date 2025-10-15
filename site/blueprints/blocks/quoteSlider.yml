@@ -1,0 +1,73 @@
+name: Zitat Slider
+icon: text-middle
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      acc:
+        label: Zitate
+        type: structure
+        fields:
+          text:
+            label: Zitat
+            extends: fields/writer
+            nodes: false
+            marks: false
+            placeholder: Das Zitat
+          author:
+            label: Author
+            extends: fields/writer
+            inline: true
+            marks: false
+            icon: user
+            placeholder: Der/die Autor:in des Zitats.
+  settings:
+    label: Einstellungen
+    fields:
+      textHeadline:
+        label: Text
+        type: headline
+        numbered: false
+      textSettings:
+        label: Text Einstellungen
+        extends: groups/textGroup
+      authorHeadline:
+        label: Autor
+        type: headline
+        numbered: false
+      authorSettings:
+        label: Zitat
+        extends: groups/titleGroup
+        fields:
+          level: false
+          titleGap: false
+      sliderHeadline:
+        label: Slider
+        type: headline
+        numbered: false
+      controls:
+        label: Optionen
+        type: checkboxes
+        width: 1/1
+        columns: 3
+        default:
+          - arrows
+          - dots
+        options:
+          autoplay: Autoplay
+          arrows: Navigation
+          dots: Punkte
+      color:
+        label: Farbe
+        type: select
+        width: 1/4
+        default: black
+        extends: fields/colors
+      time:
+        label: Timing
+        type: number
+        width: 1/4
+        default: 5000
+        after: ms
+      meta: fields/metadata

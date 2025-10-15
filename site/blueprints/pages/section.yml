@@ -1,0 +1,69 @@
+title: Sektion
+icon: box
+
+buttons:
+  - languages
+  - frontend-preview
+  - frontend-open
+
+tabs:
+  content:
+    label: Inhalt
+    icon: text
+    sections:
+      contentMainDrafts:
+        label: Entwürfe
+        type: pages
+        status: drafts
+        layout: list
+        size: small
+        templates:
+          - item
+      contentMainUnlisted:
+        label: Unveröffentlicht
+        type: pages
+        status: unlisted
+        layout: list
+        size: small
+        templates:
+          - item
+      contentMain:
+        label: Veröffentlicht
+        type: pages
+        sortable: true
+        status: published
+        layout: cards
+        size: medium
+        image:
+          query: page.thumbnail.toFile
+          ratio: 3/2
+          cover: true
+        info: "{{ page.description }}"
+        templates:
+          - item
+        create:
+          - item
+  blocksPre:
+    label: Pre Layouts
+    icon: grid-top
+    fields:
+      layoutPre:
+        label: Layouts vor dem Inhalt
+        extends: fields/layout
+        settings: tabs/config
+  blocksPost:
+    label: Post Layouts
+    icon: grid-bottom
+    fields:
+      layoutPost:
+        label: Layouts nach dem Inhalt
+        extends: fields/layout
+        settings: tabs/config
+
+  settings:
+    label: Einstellungen
+    icon: cog
+    fields:
+      sectionDisplaySettings:
+        extends: groups/sectionDisplayGroup
+  meta: tabs/meta/site
