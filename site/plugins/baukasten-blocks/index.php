@@ -390,6 +390,9 @@ function getBlockArray(\Kirby\Cms\Block $block)
             $blockArray['content']['formBorderRadius'] = $block->formBorderRadius()->toInt();
             $blockArray['content']['buttonLocal'] = $block->buttonLocal()->toBool(false);
             $blockArray['content']['buttonAlign'] = $block->buttonAlign()->value();
+            $blockArray['content']['textfont'] = $block->textFont()->value();
+            $blockArray['content']['textsize'] = $block->textSize()->value();
+            $blockArray['content']['textcolor'] = $block->textColor()->value();
 
             // Process fields object with nested configurations
             $fieldsObject = $block->fields()->toObject();
@@ -427,14 +430,6 @@ function getBlockArray(\Kirby\Cms\Block $block)
                 'errorMessage' => [
                     'text' => $fieldsObject->errorMessage()->toObject()->text()->value(),
                 ],
-            ];
-
-            // Process textGroup object
-            $textGroupObject = $block->textGroup()->toObject();
-            $blockArray['content']['textGroup'] = [
-                'textfont' => $textGroupObject->textFont()->value(),
-                'textcolor' => $textGroupObject->textColor()->value(),
-                'textsize' => $textGroupObject->textSize()->value(),
             ];
 
             // Process buttonSettings object if buttonLocal is true
