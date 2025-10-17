@@ -16,7 +16,7 @@ tabs:
           template: slider
         image:
           ratio: 1/1
-        help: "Für weitere Optionen (Fokus, Link und Beschriftung) das Bild anklicken."
+        help: 'Für weitere Optionen (Fokus, Link und Beschriftung) das Bild anklicken.'
   settings:
     label: Einstellungen
     fields:
@@ -51,6 +51,7 @@ tabs:
           full: Vollbild
           overlay: Overlay
           ticker: Ticker
+          infinite: Endlos
       color:
         label: Farbe
         type: select
@@ -124,7 +125,7 @@ tabs:
         label: field.blocks.heading.level
         type: select
         empty: false
-        default: "h2"
+        default: 'h2'
         width: 1/6
         options:
           - h1
