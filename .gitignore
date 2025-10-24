@@ -56,3 +56,4 @@ site/plugins/*
 !site/plugins/baukasten-mime/
 !site/plugins/baukasten-programmable-blueprints/
 !site/plugins/meta/
+AGENTS.md
