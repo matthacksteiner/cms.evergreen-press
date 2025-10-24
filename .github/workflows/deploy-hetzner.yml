@@ -50,8 +50,7 @@ jobs:
           username: ${{ secrets.HETZNER_USER }}
           key: ${{ secrets.HETZNER_KEY }}
           script: |
-            cd /var/www/${{ secrets.HETZNER_PATH }}/
-            composer install --no-interaction --prefer-dist --optimize-autoloader
+            bash -c 'cd /var/www/${{ secrets.HETZNER_PATH }}/ && composer install --no-interaction --prefer-dist --optimize-autoloader'
 
       - name: Clear cache
         uses: appleboy/ssh-action@v1.0.3
