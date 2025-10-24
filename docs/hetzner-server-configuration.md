@@ -206,28 +206,50 @@ server {
 
 ### Simple 3-Step Process
 
-#### 1. Create the Site
+#### 1. Setup Actions in Github
+
+create Github secrets for Hetzner - check 'Hetzner' in 1Password
+
+#### 2. Create the Site
 
 ```bash
-ssh hetzner-root 'sudo add-site cms.yourproject.com kirbyuser'
+ssh hetzner-root 'sudo add-site cms.yourproject cms.yourproject.com kirbyuser'
 ```
 
-This creates the directory structure and nginx configuration.
+**Arguments:**
 
-#### 2. Deploy Your Kirby Files
+- `cms.yourproject` = directory name in `/var/www/`
+- `cms.yourproject.com` = full domain name for nginx
+- `kirbyuser` = file owner (optional, defaults to kirbyuser)
 
-Deploy via GitHub Actions or manually copy files to `/var/www/cms.yourproject.com/`
+This creates the directory structure and nginx configuration with the correct domain.
 
-#### 3. Get SSL Certificate
+#### 3. Deploy Your Kirby Files
+
+Deploy via GitHub Actions or manually copy files to `/var/www/cms.yourproject/`
+
+#### 4. Set DNS Settings in Gandi
+
+change DNS settings to A 91.98.120.110
+
+check if change is working
 
 ```bash
-ssh hetzner-root 'sudo add-ssl-cert cms.yourproject.com your@email.com'
+dig cms.project.com +short
 ```
 
-#### 4. Fix Permissions (if needed)
+#### 5. Get SSL Certificate
 
 ```bash
-ssh hetzner-root 'sudo fix-kirby-permissions cms.yourproject.com'
+ssh hetzner-root 'sudo add-ssl-cert cms.yourproject.com contact@matthiashacksteiner.net'
+```
+
+The certificate will now install automatically since the domain matches the nginx config!
+
+#### 6. Fix Permissions
+
+```bash
+ssh hetzner-root 'sudo fix-kirby-permissions cms.yourproject'
 ```
 
 **Done!** Your site is now live at `https://cms.yourproject.com`
@@ -252,21 +274,30 @@ Creates a new Kirby CMS site with nginx configuration.
 **Usage:**
 
 ```bash
-sudo add-site <domain> [deploy-user]
+sudo add-site <directory> <domain> [deploy-user]
 ```
 
 **Example:**
 
 ```bash
-sudo add-site cms.myproject.com kirbyuser
+sudo add-site cms.fifth-music cms.fifth-music.com kirbyuser
 ```
+
+**Arguments:**
+
+- `directory` - Directory name in `/var/www/` (e.g., `cms.fifth-music`)
+- `domain` - Full domain name for nginx (e.g., `cms.fifth-music.com`)
+- `deploy-user` - User for file ownership (optional, defaults to `kirbyuser`)
 
 **What it does:**
 
-- Creates `/var/www/<domain>/` directory
+- Creates `/var/www/<directory>/` directory
 - Sets ownership to `kirbyuser:www-data`
-- Generates secure nginx configuration (with Kirby security rules)
+- Generates secure nginx configuration with the correct domain (includes Kirby security rules)
 - Enables the site and reloads nginx
+
+**Why separate directory and domain?** This prevents mismatches that cause SSL certificate
+installation failures.
 
 ---
 
@@ -302,13 +333,13 @@ Fixes file ownership and permissions for Kirby CMS writable directories.
 **Usage:**
 
 ```bash
-sudo fix-kirby-permissions <domain>
+sudo fix-kirby-permissions <directory>
 ```
 
 **Example:**
 
 ```bash
-sudo fix-kirby-permissions cms.myproject.com
+sudo fix-kirby-permissions cms.fifth-music
 ```
 
 **What it does:**
@@ -327,6 +358,7 @@ sudo fix-kirby-permissions cms.myproject.com
 - After deploying new files
 - When you get permission errors in the Kirby Panel
 - After manually copying files to the server
+- When you see "cannot create directory" errors
 
 ---
 
@@ -636,14 +668,20 @@ If you get permission errors in Kirby Panel or during deployment:
 **Quick Fix:**
 
 ```bash
-ssh hetzner-root 'sudo fix-kirby-permissions <domain>'
+ssh hetzner-root 'sudo fix-kirby-permissions <directory>'
+```
+
+**Example:**
+
+```bash
+ssh hetzner-root 'sudo fix-kirby-permissions cms.fifth-music'
 ```
 
 **Manual Check:**
 
-1. Check file ownership: `ls -la /var/www/<site>/`
+1. Check file ownership: `ls -la /var/www/<directory>/`
 2. Verify group membership: `id kirbyuser`
-3. Check storage directory permissions: `ls -la /var/www/<site>/storage/`
+3. Check storage directory permissions: `ls -la /var/www/<directory>/storage/`
 
 The `fix-kirby-permissions` script automatically sets:
 
