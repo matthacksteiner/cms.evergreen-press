@@ -53,6 +53,8 @@ The following PHP extensions required by Kirby CMS are installed:
 ### Composer
 
 - **Version**: 2.8.12 (released 2025-09-19)
+- **Location**: `/usr/local/bin/composer` (globally installed)
+- **Available in**: Both bash and fish shells
 
 ### SSL/TLS
 
@@ -542,11 +544,22 @@ sudo certbot renew --dry-run
 sudo certbot delete --cert-name <domain>
 ```
 
-### Composer Updates
+### Composer Management
 
 ```bash
+# Check composer version
+composer --version
+
+# Update composer itself
+sudo composer self-update
+
+# Update project dependencies
 cd /var/www/cms.baukasten/
 composer update --no-interaction --prefer-dist --optimize-autoloader
+
+# Install dependencies (after deployment)
+cd /var/www/cms.baukasten/
+composer install --no-interaction --prefer-dist --optimize-autoloader
 ```
 
 ## Performance Optimization
