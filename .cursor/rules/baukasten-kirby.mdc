@@ -188,3 +188,62 @@ When creating a new block type in the Baukasten system, the following requiremen
 - Include both technical and user-facing documentation as appropriate
 - Document plugin functionality and integration points
 - Maintain API endpoint documentation for frontend consumption
+
+## Server Configuration Documentation Rule
+
+**CRITICAL**: Any changes made to the Hetzner server (`hetzner-root` or `hetzner-kirby` SSH connections) MUST be documented in `docs/hetzner-server-configuration.md`.
+
+### When to Document
+
+Document ALL server changes including:
+
+- Configuration file modifications (Nginx, PHP, fail2ban, UFW, SSH, etc.)
+- New software installations or updates
+- Security hardening changes
+- Performance optimizations
+- New scripts added to `/usr/local/bin/` or `/root/scripts/`
+- Firewall rule changes
+- SSL certificate additions
+- Any system service modifications
+
+### How to Document
+
+Add an entry to the "Change Log" section in `docs/hetzner-server-configuration.md`:
+
+```markdown
+### [DATE]
+
+- ✅ **[Change Title]** - Brief description
+  - Configuration: File paths affected
+  - Settings: What was changed (before → after)
+  - Purpose: Why this change was made
+  - Impact: Performance/security improvements
+```
+
+### Documentation Format
+
+- Use emojis for clarity:
+  - ✅ Completed change
+  - 🎯 Major milestone
+  - ⚠️ Warning or breaking change
+  - 🔄 Updated configuration
+- Include technical details (file paths, commands, settings)
+- Explain the reasoning and impact
+- Reference any related documentation
+
+### Examples
+
+Good documentation entry:
+
+```markdown
+- ✅ **PHP OPcache Optimization** - Enabled and configured for Kirby Panel performance
+  - Configuration: `/etc/php/8.3/mods-available/opcache.ini`
+  - Memory: 128MB for ~10 Kirby sites
+  - Performance: 2-3x faster Panel operations (1000ms → 350ms)
+```
+
+Bad documentation entry:
+
+```markdown
+- Updated PHP config
+```

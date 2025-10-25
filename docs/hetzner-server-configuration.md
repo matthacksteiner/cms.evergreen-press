@@ -1211,6 +1211,80 @@ The server is configured for true "set and forget" operation:
 
 **Expected hands-off operation**: 1-2 years minimum, potentially 2-3+ years
 
+## Change Log
+
+This section tracks all configuration changes made to the Hetzner server (`hetzner-root` /
+`hetzner-kirby`). All server modifications must be documented here.
+
+### October 25, 2025
+
+- ✅ **UptimeRobot IP Whitelist** - Added 232 UFW firewall rules for 116 UptimeRobot monitoring IPs
+
+  - Script saved to `/root/scripts/add-uptimerobot-ips.sh` for future updates
+  - Source: https://cdn.uptimerobot.com/api/IPv4.txt
+  - Enables external uptime monitoring without false positives
+
+- ✅ **Comprehensive Backup Strategy** - Documented complete disaster recovery process
+  - Backup location: Synology NAS `/volume1/NAS-Drive/Backup/hetzner/`
+  - Retention: 10 most recent backups
+  - Includes: Website files, configs, SSL certs, system state
+  - Recovery time: ~1-2 hours for full server rebuild
+
+### October 24, 2025
+
+- ✅ **Automatic Kernel Updates** - Enabled automatic reboots for security patches
+
+  - Configuration: `/etc/apt/apt.conf.d/50unattended-upgrades`
+  - Reboot time: 3:00 AM when kernel updates require it
+  - Frequency: 1-3 times per year
+  - Downtime: ~2 minutes per reboot
+
+- ✅ **PHP OPcache Optimization** - Enabled and configured for Kirby Panel performance
+
+  - Configuration: `/etc/php/8.3/mods-available/opcache.ini`
+  - Memory: 128MB for ~10 Kirby sites
+  - Max files: 10,000 cached PHP files
+  - Performance: 2-3x faster Panel operations (1000ms → 350ms)
+
+- ✅ **PHP-FPM Pool Optimization** - Tuned for headless Kirby CMS instances
+
+  - Configuration: `/etc/php/8.3/fpm/pool.d/www.conf`
+  - Reduced max_children from 50 → 30
+  - Process recycling: 500 requests
+  - Memory savings: ~350MB (8-10 processes vs 15)
+  - Backup: `/etc/php/8.3/fpm/pool.d/www.conf.backup-20251024-*`
+
+- ✅ **HSTS Security Headers** - Added to all Nginx site configurations
+
+  - Files modified: All sites in `/etc/nginx/sites-available/`
+  - Header: `Strict-Transport-Security: max-age=31536000; includeSubDomains`
+  - Purpose: Prevents SSL downgrade attacks, enforces HTTPS for 1 year
+
+- ✅ **Custom Fail2ban Jail for Kirby Panel** - Protection against brute force login attempts
+
+  - Filter: `/etc/fail2ban/filter.d/nginx-kirby-panel.conf`
+  - Jail: `/etc/fail2ban/jail.d/kirby-panel.conf`
+  - Settings: 5 max retries, 10-minute detection window, 1-hour ban time
+  - Monitors: `/panel/login` endpoint across all Nginx access logs
+
+- ✅ **UFW Firewall** - Enabled and configured with default deny policy
+  - Allowed ports: 22 (SSH), 80 (HTTP), 443 (HTTPS)
+  - Default policy: Deny all other incoming connections
+  - IPv6: Fully supported
+
+### October 9, 2025
+
+- 🎯 **Initial Server Setup** - Ubuntu 24.04 LTS on Hetzner Cloud VPS
+  - Nginx 1.24.0 web server
+  - PHP 8.3.26 with FPM
+  - Composer 2.8.12
+  - Let's Encrypt SSL with Certbot
+  - Automatic security updates enabled
+  - Created `kirbyuser` deployment user
+  - Created management scripts: `add-site`, `add-ssl-cert`, `fix-kirby-permissions`, `remove-site`
+
+---
+
 ## Related Documentation
 
 - [Deployment and Hosting](./deployment-hosting.md) - General deployment strategies
