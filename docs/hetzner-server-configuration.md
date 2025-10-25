@@ -11,8 +11,9 @@ instances.
 4. [Security Configuration](#security-configuration) - Firewall and intrusion prevention
 5. [Nginx Configuration](#nginx-configuration) - Web server setup
 6. [SSL Certificates](#ssl-certificates) - HTTPS and auto-renewal
-7. [GitHub Actions Deployment](#github-actions-deployment) - Automated deployments
-8. [Troubleshooting](#troubleshooting) - Common issues and fixes
+7. [Backup Strategy](#backup-strategy) - Disaster recovery and data protection
+8. [GitHub Actions Deployment](#github-actions-deployment) - Automated deployments
+9. [Troubleshooting](#troubleshooting) - Common issues and fixes
 
 ## Server Overview
 
@@ -560,6 +561,198 @@ Currently hosted sites with Let's Encrypt SSL certificates:
 **Important**: The auto-renewal system is fully automatic. No manual intervention is required.
 Certificates will renew themselves continuously.
 
+## Backup Strategy
+
+### Overview
+
+The server implements a comprehensive backup strategy that enables complete disaster recovery. All
+critical data and configurations are backed up to external storage (Synology NAS) via automated
+scripts.
+
+### Backup Location
+
+- **Storage**: Synology NAS at `/volume1/NAS-Drive/Backup/hetzner/`
+- **Retention**: Latest 10 backups
+- **Frequency**: Daily (recommended: 2 AM via cron)
+- **Estimated Size**: ~1-3GB per backup (~10-30GB total)
+
+### What Gets Backed Up
+
+#### 🔴 Critical Data (Cannot Be Recreated)
+
+1. **Website Content** (`/var/www/*/content/`)
+
+   - All Kirby CMS content
+   - User-uploaded files
+   - Content structure and metadata
+
+2. **User Accounts** (`/var/www/*/site/accounts/`)
+
+   - All Panel user accounts and passwords
+
+3. **Custom Code** (`/var/www/*/site/`)
+
+   - Custom blueprints
+   - Custom plugins (baukasten-blocks, etc.)
+   - Templates and models
+   - Configuration files
+
+4. **Environment Files** (`/var/www/*/.env`)
+
+   - Site-specific environment variables
+   - API keys and credentials
+
+5. **SSL Certificates** (`/etc/letsencrypt/`)
+
+   - All Let's Encrypt certificates and keys
+   - Certificate configuration
+
+6. **Custom Scripts** (`/usr/local/bin/`)
+   - add-site, add-ssl-cert, fix-kirby-permissions, remove-site
+
+#### 🟡 Configuration Files (Time-Consuming to Recreate)
+
+1. **Nginx Configurations** (`/etc/nginx/`)
+
+   - All site configurations
+   - Security headers (HSTS, etc.)
+   - SSL settings
+
+2. **PHP Configuration** (`/etc/php/8.3/`)
+
+   - OPcache settings (optimized for Kirby)
+   - PHP-FPM pool configuration
+   - PHP extensions configuration
+
+3. **fail2ban Configuration** (`/etc/fail2ban/`)
+
+   - Custom Kirby Panel jail
+   - Filter configurations
+   - Jail settings
+
+4. **UFW Firewall** (`/etc/ufw/`)
+
+   - Firewall rules
+   - Application profiles
+
+5. **SSH Configuration** (`/etc/ssh/sshd_config`)
+
+   - Hardened SSH settings
+
+6. **APT Configuration** (`/etc/apt/apt.conf.d/`)
+   - Automatic updates settings
+   - Auto-reboot configuration
+
+#### 🟢 System State Information (For Reference)
+
+1. **Installed Packages** - Complete list for apt reinstallation
+2. **Cron Jobs** - Root and kirbyuser scheduled tasks
+3. **Service Status** - fail2ban, UFW, PHP modules
+4. **System Information** - OS version, disk usage, network config
+5. **Nginx Sites** - List of enabled sites
+
+#### ❌ Excluded (Reinstallable/Regeneratable)
+
+1. **Kirby Core** (`/var/www/*/kirby/`) - `composer install`
+2. **Vendor Packages** (`/var/www/*/vendor/`) - `composer install`
+3. **Generated Thumbnails** (`/var/www/*/public/media/`) - Auto-regenerate
+4. **Cache Files** (`/var/www/*/storage/cache/`) - Auto-regenerate
+5. **Sessions** (`/var/www/*/storage/sessions/`) - Temporary
+6. **System Cache** (`/var/cache/`, `/var/tmp/`) - Temporary
+
+### Backup Script
+
+**Location**: Synology NAS **Script**: `hetzner-backup.sh` **SSH Key**:
+`/volume1/homes/fifth/.ssh/hetzner-kirby`
+
+The backup script performs:
+
+1. **SSH Connection Verification** - Ensures connection before starting
+2. **Website Files Backup** - All sites with smart exclusions
+3. **Configuration Backup** - All server configurations
+4. **SSL Certificates Backup** - All Let's Encrypt certs
+5. **System State Export** - Package lists, cron jobs, service status
+6. **Restore Documentation** - Auto-generated recovery guide
+7. **Size Reporting** - Backup size tracking
+8. **Auto-Cleanup** - Maintains only 10 most recent backups
+
+### Disaster Recovery
+
+Each backup includes `RESTORE-INSTRUCTIONS.md` with complete step-by-step instructions for
+rebuilding the server from scratch.
+
+**Recovery Steps Summary:**
+
+1. Deploy fresh Ubuntu 24.04 LTS server
+2. Install required packages (nginx, PHP 8.3, composer, certbot, fail2ban, ufw)
+3. Create kirbyuser with correct permissions
+4. Restore all configuration files
+5. Restore SSL certificates
+6. Restore website files
+7. Run `composer install` for each site
+8. Configure and start all services
+9. Verify everything works
+
+**Full Recovery Time**: ~1-2 hours (mostly automated)
+
+### Backup Schedule
+
+**Recommended Cron Schedule** (Synology NAS):
+
+```bash
+# Daily backup at 2 AM
+0 2 * * * /volume1/NAS-Drive/Backup/hetzner-backup.sh
+
+# Alternative: Weekly backup on Sunday at 2 AM
+# 0 2 * * 0 /volume1/NAS-Drive/Backup/hetzner-backup.sh
+```
+
+### Monitoring Backups
+
+Check backup status:
+
+```bash
+# List recent backups
+ls -lh /volume1/NAS-Drive/Backup/hetzner/
+
+# Check latest backup size
+du -sh /volume1/NAS-Drive/Backup/hetzner/$(ls -t /volume1/NAS-Drive/Backup/hetzner/ | head -1)
+
+# View latest backup log
+tail -100 /volume1/NAS-Drive/Backup/hetzner/backup-*.log | tail -50
+```
+
+### Backup Verification
+
+Periodically verify backups:
+
+1. **Check Latest Backup Date**
+
+   ```bash
+   ls -lt /volume1/NAS-Drive/Backup/hetzner/ | head -5
+   ```
+
+2. **Verify Backup Contents**
+
+   ```bash
+   ls -R /volume1/NAS-Drive/Backup/hetzner/[LATEST_BACKUP]/ | head -50
+   ```
+
+3. **Check for Critical Files**
+
+   ```bash
+   # Verify nginx configs exist
+   ls /volume1/NAS-Drive/Backup/hetzner/[LATEST_BACKUP]/etc/nginx/sites-available/
+
+   # Verify websites backed up
+   ls /volume1/NAS-Drive/Backup/hetzner/[LATEST_BACKUP]/var/www/
+   ```
+
+### Restore Testing
+
+**Recommended**: Test restore process annually in a development environment to ensure backups are
+functional.
+
 ## GitHub Actions Deployment
 
 ### Workflow: `.github/workflows/deploy-hetzner.yml`
@@ -988,6 +1181,11 @@ The server is configured for true "set and forget" operation:
 
 - Review UptimeRobot reports (2 minutes)
 - Check disk space: `ssh hetzner-root 'df -h'` (1 minute)
+- Verify latest backup exists and is recent (1 minute)
+
+**Annually:**
+
+- Test disaster recovery process in development environment (optional but recommended)
 
 **That's it!** No other maintenance required for 1-2+ years.
 
@@ -999,7 +1197,7 @@ The server is configured for true "set and forget" operation:
 4. **fail2ban protection** - Blocks attacks automatically (3,513+ IPs banned)
 5. **PHP OPcache** - Performance stays optimal without tuning
 6. **Optimized PHP-FPM** - Handles load efficiently with minimal resources
-7. **External backups** - /var/ backed up automatically
+7. **Comprehensive backups** - All data and configs backed up to Synology NAS
 8. **Log rotation** - Logs don't fill disk space
 
 ### ⚠️ When Manual Intervention is Needed
@@ -1029,5 +1227,5 @@ The server is configured for true "set and forget" operation:
 
 ---
 
-**Last Updated**: October 24, 2025 **Optimizations Applied**: Security hardening, HSTS headers,
-fail2ban, PHP OPcache, PHP-FPM tuning, automatic reboots
+**Last Updated**: October 25, 2025 **Optimizations Applied**: Security hardening, HSTS headers,
+fail2ban, PHP OPcache, PHP-FPM tuning, automatic reboots, comprehensive backup strategy
