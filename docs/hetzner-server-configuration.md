@@ -1218,6 +1218,15 @@ This section tracks all configuration changes made to the Hetzner server (`hetzn
 
 ### October 25, 2025
 
+- ✅ **Kirby Panel HEAD Request Support** - Fixed UptimeRobot monitoring compatibility
+
+  - Problem: Kirby CMS doesn't support HEAD requests, causing HTTP 500 errors
+  - Solution: Added Nginx location block for `/panel` that returns HTTP 200 for HEAD requests
+  - Files modified: All Nginx site configurations in `/etc/nginx/sites-available/cms.*`
+  - Script: `/root/scripts/fix-head-requests.sh` for applying fix to existing sites
+  - Updated: `/usr/local/bin/add-site` to include HEAD request fix for new sites
+  - Impact: UptimeRobot monitoring now works correctly with all Kirby Panel sites
+
 - ✅ **UptimeRobot IP Whitelist** - Added 232 UFW firewall rules for 116 UptimeRobot monitoring IPs
 
   - Script saved to `/root/scripts/add-uptimerobot-ips.sh` for future updates
