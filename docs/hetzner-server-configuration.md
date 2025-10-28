@@ -1216,6 +1216,56 @@ The server is configured for true "set and forget" operation:
 This section tracks all configuration changes made to the Hetzner server (`hetzner-root` /
 `hetzner-kirby`). All server modifications must be documented here.
 
+### October 27, 2025
+
+- ⚠️ **Critical SSH Configuration Issue Resolved** - Fixed complete SSH lockout
+
+  - **Root Cause**: Triple combination of issues preventing SSH access:
+
+    1. `/etc/ssh/sshd_config` had `AllowUsers deploy` restriction - root and kirbyuser couldn't
+       connect
+    2. UFW firewall rules had gaps - IPv4 SSH connections were blocked despite rules appearing
+       correct
+    3. fail2ban banned admin IP (85.127.107.236) after repeated failed connection attempts
+
+  - **Symptoms**:
+
+    - "Connection refused" when trying to connect via `ssh hetzner-root` or `ssh hetzner-kirby`
+    - Port 443 worked fine, but port 22 completely blocked
+    - SSH logs showed NO connection attempts from admin IP (blocked at firewall level)
+    - `dmesg` showed hundreds of `[UFW BLOCK]` entries
+
+  - **Solution Applied**:
+
+    1. Updated `/etc/ssh/sshd_config` line 136: `AllowUsers deploy root kirbyuser`
+    2. Restarted SSH service: `systemctl restart ssh`
+    3. Unbanned IP from fail2ban: `fail2ban-client set sshd unbanip 85.127.107.236`
+    4. Added UFW rule at position 1: `ufw insert 1 allow from 85.127.107.236 to any port 22`
+    5. Fixed SSH socket activation conflicts (disabled ssh.socket)
+
+  - **Prevention Measures**:
+
+    - Add admin IPs to fail2ban ignore list in `/etc/fail2ban/jail.d/override.conf`:
+      ```ini
+      [DEFAULT]
+      ignoreip = 127.0.0.1/8 ::1 85.127.107.236
+      ```
+    - Always verify SSH config before applying: `sudo sshd -t`
+    - Check SSH is listening on both IPv4 and IPv6: `sudo ss -tlnp | grep :22`
+    - Backup critical configs before modifications: `/etc/ssh/sshd_config`, `/etc/fail2ban/`,
+      `/etc/ufw/`
+    - Test SSH access from secondary terminal before closing existing session
+
+  - **LLM Configuration Warning**:
+
+    - When using AI assistants for server configuration, always verify each command before execution
+    - LLMs can provide syntactically correct but incomplete configurations (e.g., IPv6-only rules,
+      missing ignoreip settings)
+    - Ubuntu's default behaviors (socket-activation, v6-only, etc.) can cause subtle failures
+    - Always test services after configuration changes
+
+  - **Access Restored**: October 27, 2025 at ~17:05 UTC
+
 ### October 25, 2025
 
 - ✅ **Kirby Panel HEAD Request Support** - Fixed UptimeRobot monitoring compatibility
