@@ -1288,16 +1288,18 @@ This section tracks all configuration changes made to the Hetzner server (`hetzn
   - **Prevention Measures**:
 
     - Add admin IPs to fail2ban ignore list in `/etc/fail2ban/jail.d/override.conf`:
+
       ```ini
       [DEFAULT]
       ignoreip = 127.0.0.1/8 ::1 85.127.107.236
-      
+
       [sshd]
       enabled = true
       findtime = 10m
       maxretry = 5
       bantime = 30m
       ```
+
     - Always verify SSH config before applying: `sudo sshd -t`
     - Check SSH is listening on both IPv4 and IPv6: `sudo ss -tlnp | grep :22`
     - Backup critical configs before modifications: `/etc/ssh/sshd_config`, `/etc/fail2ban/`,
@@ -1409,5 +1411,5 @@ This section tracks all configuration changes made to the Hetzner server (`hetzn
 ---
 
 **Last Updated**: October 28, 2025 **Optimizations Applied**: Security hardening, HSTS headers,
-fail2ban, PHP OPcache, PHP-FPM tuning, automatic reboots, comprehensive backup strategy
-**Last Verified**: October 28, 2025 (Complete server audit with root access - 99% accuracy)
+fail2ban, PHP OPcache, PHP-FPM tuning, automatic reboots, comprehensive backup strategy **Last
+Verified**: October 28, 2025 (Complete server audit with root access - 99% accuracy)
