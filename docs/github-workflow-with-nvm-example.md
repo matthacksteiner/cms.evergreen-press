@@ -75,6 +75,7 @@ jobs:
           username: ${{ secrets.HETZNER_USER }}
           key: ${{ secrets.HETZNER_KEY }}
           script: |
+            bash -c '
             cd /var/www/${{ secrets.HETZNER_PATH }}/
 
             # Load NVM in non-interactive shell
@@ -108,6 +109,7 @@ jobs:
             npm run build
 
             echo "✅ Frontend build complete!"
+            '
 ```
 
 ## Key Changes from Original Workflow
@@ -137,6 +139,7 @@ jobs:
     username: ${{ secrets.HETZNER_USER }}
     key: ${{ secrets.HETZNER_KEY }}
     script: |
+      bash -c '
       cd /var/www/${{ secrets.HETZNER_PATH }}/
 
       # Load NVM
@@ -151,6 +154,7 @@ jobs:
 
       npm ci
       npm run build
+      '
 ```
 
 ## What Was Added
@@ -174,6 +178,40 @@ You should see:
 ```
 
 ## Troubleshooting
+
+### Error: "fish: Missing end to balance this if statement"
+
+**Problem**: SSH action fails with fish shell syntax errors when running bash commands
+
+**Cause**: The kirbyuser's default shell is fish, but the workflow uses bash syntax
+(`if [ -f .nvmrc ]; then`)
+
+**Solution**: Wrap all bash commands in `bash -c '...'` to explicitly use bash:
+
+```yaml
+script: |
+  bash -c '
+  cd /var/www/${{ secrets.HETZNER_PATH }}/
+
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+  if [ -f .nvmrc ]; then
+    nvm install
+    nvm use
+  fi
+
+  npm ci
+  npm run build
+  '
+```
+
+**Key points**:
+
+- ✅ Use `bash -c '...'` to force bash execution
+- ✅ Wrap entire script in single quotes
+- ✅ Close with `'` on its own line
+- ⚠️ All examples in this document use this pattern
 
 ### Error: "protocol version mismatch -- is your shell clean?"
 
