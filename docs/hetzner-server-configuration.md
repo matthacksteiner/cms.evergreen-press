@@ -154,7 +154,8 @@ nvm ls-remote --lts
 
 **Using with .nvmrc files:**
 
-Projects with `.nvmrc` files will automatically use the specified Node version in GitHub Actions deployments. The workflow should load NVM and use the version from `.nvmrc`:
+Projects with `.nvmrc` files will automatically use the specified Node version in GitHub Actions
+deployments. The workflow should load NVM and use the version from `.nvmrc`:
 
 ```bash
 export NVM_DIR="$HOME/.nvm"
@@ -1366,6 +1367,7 @@ This section tracks all configuration changes made to the Hetzner server (`hetzn
 ### October 28, 2025
 
 - ✅ **NVM (Node Version Manager) Installation** - Added Node.js support for frontend builds
+
   - Version: NVM v0.39.7
   - Node.js: v24.11.0 (LTS)
   - NPM: v11.6.1
@@ -1373,6 +1375,8 @@ This section tracks all configuration changes made to the Hetzner server (`hetzn
   - Configuration: Added to `~/.bashrc` and `~/.bash_profile` for non-interactive SSH sessions
   - Purpose: Enables frontend asset building in GitHub Actions workflows
   - Support: Automatically uses Node version from project `.nvmrc` files
+  - **Fish Shell Fix**: Moved `nvm use lts` inside `if status is-interactive` block to prevent rsync
+    protocol errors
 
 - ✅ **Server Configuration Verification** - Complete audit performed with root access
   - All security configurations verified and match documentation
