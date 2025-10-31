@@ -8,7 +8,7 @@ instances.
 1. [Quick Start: Adding a New Site](#quick-start-adding-a-new-site) - Simple 4-step process
 2. [Management Scripts](#management-scripts) - Available automation scripts
 3. [Server Overview](#server-overview) - Hardware and software specs
-4. [Security Configuration](#security-configuration) - Firewall and intrusion prevention
+4. [Security Configuration](#security-configuration) - SSH, firewall, and intrusion prevention
 5. [Nginx Configuration](#nginx-configuration) - Web server setup
 6. [SSL Certificates](#ssl-certificates) - HTTPS and auto-renewal
 7. [Backup Strategy](#backup-strategy) - Disaster recovery and data protection
@@ -189,6 +189,67 @@ request_terminate_timeout = 60    # Prevent hung requests
 - Storage folder: `2775` (setgid bit for group inheritance)
 
 ## Security Configuration
+
+### SSH Configuration
+
+**Current Configuration** (`/etc/ssh/sshd_config`):
+
+```ini
+PermitRootLogin prohibit-password    # Root can login with SSH keys only
+PasswordAuthentication no            # No password authentication allowed
+PubkeyAuthentication yes             # SSH key authentication required
+ChallengeResponseAuthentication no   # No keyboard-interactive auth
+AllowUsers deploy root kirbyuser     # Only these users can SSH
+```
+
+#### Enabling/Disabling Root SSH Access
+
+**Root access is disabled by default for security.** To temporarily enable it for administrative
+tasks:
+
+**Enable root access:**
+
+```bash
+# 1. Edit SSH config (as kirbyuser with sudo)
+ssh hetzner-kirby
+sudo nano /etc/ssh/sshd_config
+
+# 2. Ensure these settings are present:
+PermitRootLogin prohibit-password    # Key-only auth (secure)
+AllowUsers deploy root kirbyuser     # Include 'root' in list
+
+# 3. Test configuration
+sudo sshd -t
+
+# 4. Restart SSH service
+sudo systemctl restart ssh
+
+# 5. Test from your local machine (don't close existing session!)
+ssh hetzner-root
+```
+
+**Disable root access (after administrative work):**
+
+```bash
+# 1. Edit SSH config
+sudo nano /etc/ssh/sshd_config
+
+# 2. Change AllowUsers line to:
+AllowUsers deploy kirbyuser          # Remove 'root' from list
+
+# 3. Test and restart
+sudo sshd -t
+sudo systemctl restart ssh
+```
+
+**Security Best Practices:**
+
+- ✅ Always use `PermitRootLogin prohibit-password` (never `yes`)
+- ✅ Keep root access disabled when not needed
+- ✅ Use `kirbyuser` with sudo for regular administration
+- ✅ Test SSH config before applying: `sudo sshd -t`
+- ⚠️ Always test new SSH settings in a second terminal before closing your session
+- ⚠️ Never use `PermitRootLogin yes` (allows password login - insecure)
 
 ### Firewall (UFW)
 
