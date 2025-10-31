@@ -199,16 +199,20 @@ fi
 
 ```
 /var/www/
-├── cms.baukasten/           # Baukasten template CMS (active)
-├── cms.fifth-music/         # Fifth Music CMS (active)
-├── cms.kaufmannklub/        # Kaufmann Klub CMS (active)
-├── cms.kinderlosfrei/       # Kinderlosfrei CMS (active)
-├── cms.super/               # Super CMS (active)
-├── sagnichtdasseinormal.info/ # Sag nicht dass es normal ist (active)
-└── html/                    # Default directory
+├── cms.baukasten/              # Baukasten template CMS (active)
+├── cms.betinaamann-physio/     # Betina Amann Physio CMS (active)
+├── cms.dr-miller/              # Dr. Miller CMS (active)
+├── cms.fifth-music/            # Fifth Music CMS (active) - uses cms.fifth-music.com domain
+├── cms.kaufmannklub/           # Kaufmann Klub CMS (active)
+├── cms.kinderlosfrei/          # Kinderlosfrei CMS (active)
+├── cms.laterna-bezau/          # Laterna Bezau CMS (active)
+├── cms.super/                  # Super CMS (active)
+├── karin-gmeiner/              # Karin Gmeiner website (active)
+├── sagnichtdasseinormal.info/  # Sag nicht dass es normal ist (active)
+└── html/                       # Default directory
 ```
 
-**Total Active Sites**: 6 Kirby CMS instances + 1 static site
+**Total Active Sites**: 10 sites (9 Kirby CMS instances + 1 static site)
 
 ### Site Structure (cms.baukasten example)
 
@@ -660,7 +664,7 @@ sudo remove-site cms.oldproject.com
 
 ### Active Certificates
 
-Currently hosted sites with Let's Encrypt SSL certificates (as of Oct 28, 2025):
+Currently hosted sites with Let's Encrypt SSL certificates (updated Oct 31, 2025):
 
 - **cms.baukasten.matthiashacksteiner.net**
 
@@ -693,8 +697,32 @@ Currently hosted sites with Let's Encrypt SSL certificates (as of Oct 28, 2025):
   - Status: ✅ Valid
 
 - **cms.kaufmannklub.at**
+
   - Key Type: ECDSA
   - Expiry: 2026-01-23 (87 days)
+  - Status: ✅ Valid
+
+- **cms.betinaamann-physio.at**
+
+  - Key Type: ECDSA
+  - Expiry: 2026-01-29 (89 days)
+  - Status: ✅ Valid
+
+- **cms.dr-miller.at**
+
+  - Key Type: ECDSA
+  - Expiry: 2026-01-29 (89 days)
+  - Status: ✅ Valid
+
+- **cms.laterna-bezau.at**
+
+  - Key Type: ECDSA
+  - Expiry: 2026-01-29 (89 days)
+  - Status: ✅ Valid
+
+- **karin-gmeiner.at**
+  - Key Type: ECDSA
+  - Expiry: 2026-01-29 (89 days)
   - Status: ✅ Valid
 
 ### Auto-Renewal
@@ -1363,6 +1391,14 @@ The server is configured for true "set and forget" operation:
 
 This section tracks all configuration changes made to the Hetzner server (`hetzner-root` /
 `hetzner-kirby`). All server modifications must be documented here.
+
+### October 31, 2025
+
+- ✅ **Removed Duplicate Nginx Configuration** - Cleaned up cms.fifth-music duplicate
+  - Removed: `/etc/nginx/sites-available/cms.fifth-music` and symlink in `sites-enabled/`
+  - Reason: Duplicate configuration for cms.fifth-music.com (same site, same directory)
+  - Result: Only cms.fifth-music.com configuration remains (correct one with SSL)
+  - Impact: Cleaner configuration, no functional changes
 
 ### October 28, 2025
 

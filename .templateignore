@@ -16,6 +16,9 @@ setup-baukasten-project.sh
 update-template-version.sh
 sync-content-uberspace-to-hetzner.sh
 
+# Server configuration
+hetzner-server-configuration.md
+
 
 
 # Environment files (child repositories will have their own)
