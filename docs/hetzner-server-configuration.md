@@ -109,6 +109,62 @@ request_terminate_timeout = 60    # Prevent hung requests
 - **Location**: `/usr/local/bin/composer` (globally installed)
 - **Available in**: Both bash and fish shells
 
+### Node.js / NVM
+
+- **Version Manager**: NVM (Node Version Manager) v0.39.7
+- **Installation**: User-specific installation for `kirbyuser`
+- **Location**: `~/.nvm/` (kirbyuser home directory)
+- **Current Node Version**: v24.11.0 (LTS)
+- **NPM Version**: 11.6.1
+- **Usage**: Available in GitHub Actions deployments and non-interactive SSH sessions
+- **Configuration**: Loaded via `~/.bashrc` and `~/.bash_profile`
+
+**Install/Update NVM:**
+
+```bash
+ssh hetzner-kirby
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+source ~/.bashrc
+```
+
+**Manage Node.js versions:**
+
+```bash
+# Load NVM in bash session
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# Install Node.js versions
+nvm install --lts        # Latest LTS
+nvm install 20.10.0      # Specific version
+
+# Switch versions
+nvm use 20.10.0          # Use specific version
+nvm use default          # Use default version
+
+# Set default version
+nvm alias default 20.10.0
+
+# List installed versions
+nvm ls
+
+# List available versions
+nvm ls-remote --lts
+```
+
+**Using with .nvmrc files:**
+
+Projects with `.nvmrc` files will automatically use the specified Node version in GitHub Actions deployments. The workflow should load NVM and use the version from `.nvmrc`:
+
+```bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+if [ -f .nvmrc ]; then
+  nvm install
+  nvm use
+fi
+```
+
 ### SSL/TLS
 
 - **Certificate Manager**: Certbot (Let's Encrypt)
@@ -1308,6 +1364,15 @@ This section tracks all configuration changes made to the Hetzner server (`hetzn
 `hetzner-kirby`). All server modifications must be documented here.
 
 ### October 28, 2025
+
+- ✅ **NVM (Node Version Manager) Installation** - Added Node.js support for frontend builds
+  - Version: NVM v0.39.7
+  - Node.js: v24.11.0 (LTS)
+  - NPM: v11.6.1
+  - Installation: User-specific for `kirbyuser` at `~/.nvm/`
+  - Configuration: Added to `~/.bashrc` and `~/.bash_profile` for non-interactive SSH sessions
+  - Purpose: Enables frontend asset building in GitHub Actions workflows
+  - Support: Automatically uses Node version from project `.nvmrc` files
 
 - ✅ **Server Configuration Verification** - Complete audit performed with root access
   - All security configurations verified and match documentation
