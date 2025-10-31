@@ -666,6 +666,14 @@ sudo remove-site cms.oldproject.com
 
 Currently hosted sites with Let's Encrypt SSL certificates (updated Oct 31, 2025):
 
+**Note on www Subdomains:**
+
+- **Hetzner-hosted sites** (like karin-gmeiner.at, matthiashacksteiner.net) need www subdomain
+  support in SSL certificates if users access via www
+- **CMS sites** (cms.\*.domain.com) typically don't need www variants
+- **Netlify-hosted frontends** handle their own SSL certificates and www redirects - no Hetzner
+  configuration needed
+
 - **cms.baukasten.matthiashacksteiner.net**
 
   - Key Type: ECDSA
@@ -721,9 +729,19 @@ Currently hosted sites with Let's Encrypt SSL certificates (updated Oct 31, 2025
   - Status: ✅ Valid
 
 - **karin-gmeiner.at**
+
   - Key Type: ECDSA
+  - Domains: karin-gmeiner.at, www.karin-gmeiner.at
   - Expiry: 2026-01-29 (89 days)
   - Status: ✅ Valid
+  - Note: Includes www subdomain for Hetzner-hosted site
+
+- **matthiashacksteiner.net**
+  - Key Type: ECDSA
+  - Domains: matthiashacksteiner.net, www.matthiashacksteiner.net
+  - Expiry: 2026-01-29 (89 days)
+  - Status: ✅ Valid
+  - Note: Includes www subdomain for Hetzner-hosted site
 
 ### Auto-Renewal
 
@@ -1393,6 +1411,22 @@ This section tracks all configuration changes made to the Hetzner server (`hetzn
 `hetzner-kirby`). All server modifications must be documented here.
 
 ### October 31, 2025
+
+- ✅ **Added www Subdomain Support** - Fixed SSL for www subdomains on Hetzner-only sites
+
+  - **Important**: Only affects sites hosted directly on Hetzner (not Netlify-hosted frontends)
+  - Sites updated: `karin-gmeiner.at` and `matthiashacksteiner.net`
+  - Changes:
+    - Updated nginx configs to include `www.` subdomains in `server_name` directives
+    - Expanded SSL certificates to cover both apex and www subdomains
+    - Both `example.com` and `www.example.com` now work with valid HTTPS
+  - Files modified:
+    - `/etc/nginx/sites-available/karin-gmeiner`
+    - `/etc/nginx/sites-available/matthiashacksteiner`
+  - Certificates updated:
+    - `karin-gmeiner.at` → now includes `www.karin-gmeiner.at`
+    - `matthiashacksteiner.net` → now includes `www.matthiashacksteiner.net`
+  - **Note**: CMS subdomains (cms.\*.matthiashacksteiner.net) don't need www variants
 
 - ✅ **Removed Duplicate Nginx Configuration** - Cleaned up cms.fifth-music duplicate
   - Removed: `/etc/nginx/sites-available/cms.fifth-music` and symlink in `sites-enabled/`
