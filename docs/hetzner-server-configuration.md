@@ -20,7 +20,7 @@ instances.
 - **Hosting Provider**: Hetzner Cloud VPS
 - **Operating System**: Ubuntu 24.04.3 LTS (Noble Numbat)
 - **Kernel**: Linux 6.8.0-86-generic
-- **SSH Access**: `ssh hetzner-root` or `ssh hetzner-kirby` (kirbyuser)
+- **SSH Access**: `ssh hetzner-root` (bash shell) or `ssh hetzner-kirby` (fish shell, kirbyuser)
 - **Memory**: 3.7 GB RAM (520MB used, optimized for 10 headless Kirby sites)
 - **Disk**: 38 GB total, 2.4 GB used (7% utilization)
 - **Swap**: None configured (recommended to add 2GB for image processing safety)
@@ -259,56 +259,53 @@ fi
 PermitRootLogin prohibit-password    # Root can login with SSH keys only
 PasswordAuthentication no            # No password authentication allowed
 PubkeyAuthentication yes             # SSH key authentication required
-ChallengeResponseAuthentication no   # No keyboard-interactive auth
+KbdInteractiveAuthentication no      # No keyboard-interactive auth
 AllowUsers deploy root kirbyuser     # Only these users can SSH
 ```
 
+**Note**: Older SSH configurations may use `ChallengeResponseAuthentication` instead of
+`KbdInteractiveAuthentication` (deprecated in newer OpenSSH versions).
+
 #### Enabling/Disabling Root SSH Access
 
-**Root access is disabled by default for security.** To temporarily enable it for administrative
-tasks:
+**Root access is disabled by default for security.** Use the toggle script for easy management:
 
-**Enable root access:**
+**Toggle Script** (`/root/scripts/toggle-root-ssh.sh`):
 
 ```bash
-# 1. Edit SSH config (as kirbyuser with sudo)
+# Check current status
 ssh hetzner-kirby
-sudo nano /etc/ssh/sshd_config
+sudo /usr/local/bin/toggle-root-ssh status
 
-# 2. Ensure these settings are present:
-PermitRootLogin prohibit-password    # Key-only auth (secure)
-AllowUsers deploy root kirbyuser     # Include 'root' in list
+# Enable root access (for administrative work)
+sudo /usr/local/bin/toggle-root-ssh enable
 
-# 3. Test configuration
-sudo sshd -t
+# Disable root access (recommended default)
+sudo /usr/local/bin/toggle-root-ssh disable
+```
 
-# 4. Restart SSH service
-sudo systemctl restart ssh
+**What the script does:**
 
-# 5. Test from your local machine (don't close existing session!)
+- Automatically updates `/etc/ssh/sshd_config`
+- Tests configuration before applying (`sshd -t`)
+- Restarts SSH service safely
+- Shows clear status messages
+
+**After enabling root access, test immediately:**
+
+```bash
+# From your local machine (in a NEW terminal)
 ssh hetzner-root
 ```
 
-**Disable root access (after administrative work):**
-
-```bash
-# 1. Edit SSH config
-sudo nano /etc/ssh/sshd_config
-
-# 2. Change AllowUsers line to:
-AllowUsers deploy kirbyuser          # Remove 'root' from list
-
-# 3. Test and restart
-sudo sshd -t
-sudo systemctl restart ssh
-```
+⚠️ **Always keep your current SSH session open until you've verified the new connection works!**
 
 **Security Best Practices:**
 
 - ✅ Always use `PermitRootLogin prohibit-password` (never `yes`)
-- ✅ Keep root access disabled when not needed
+- ✅ Keep root access disabled when not needed (use the toggle script to disable after admin work)
 - ✅ Use `kirbyuser` with sudo for regular administration
-- ✅ Test SSH config before applying: `sudo sshd -t`
+- ✅ The toggle script automatically tests SSH config before applying
 - ⚠️ Always test new SSH settings in a second terminal before closing your session
 - ⚠️ Never use `PermitRootLogin yes` (allows password login - insecure)
 
@@ -530,14 +527,15 @@ ssh hetzner-root 'sudo fix-kirby-permissions cms.yourproject'
 
 ## Management Scripts
 
-The server includes 4 custom bash scripts in `/usr/local/bin/` for site management:
+The server includes 5 custom bash scripts in `/usr/local/bin/` for site and server management:
 
-| Script                  | Purpose                              |
-| ----------------------- | ------------------------------------ |
-| `add-site`              | Create new site with nginx config    |
-| `add-ssl-cert`          | Get Let's Encrypt SSL certificate    |
-| `fix-kirby-permissions` | Fix file/folder permissions          |
-| `remove-site`           | Remove site completely (with backup) |
+| Script                  | Purpose                                   |
+| ----------------------- | ----------------------------------------- |
+| `add-site`              | Create new site with nginx config         |
+| `add-ssl-cert`          | Get Let's Encrypt SSL certificate         |
+| `fix-kirby-permissions` | Fix file/folder permissions               |
+| `remove-site`           | Remove site completely (with backup)      |
+| `toggle-root-ssh`       | Enable/disable root SSH access (security) |
 
 ### add-site
 
@@ -659,6 +657,54 @@ sudo remove-site cms.oldproject.com
 - Reloads nginx
 
 **Warning:** This requires interactive confirmation and deletes all files!
+
+---
+
+### toggle-root-ssh
+
+Safely enables or disables root SSH access for administrative tasks.
+
+**Usage:**
+
+```bash
+sudo toggle-root-ssh {enable|disable|status}
+```
+
+**Examples:**
+
+```bash
+# Check current root SSH access status
+sudo toggle-root-ssh status
+
+# Enable root SSH access (for administrative work)
+sudo toggle-root-ssh enable
+
+# Disable root SSH access (recommended default)
+sudo toggle-root-ssh disable
+```
+
+**What it does:**
+
+- Shows current SSH configuration status
+- Automatically updates `/etc/ssh/sshd_config`
+- Sets `AllowUsers deploy root kirbyuser` (enable) or `AllowUsers deploy kirbyuser` (disable)
+- Ensures `PermitRootLogin prohibit-password` (SSH keys only, never password auth)
+- Tests configuration before applying (`sshd -t`)
+- Restarts SSH service safely
+- Color-coded output for easy reading
+
+**When to use:**
+
+- **Enable:** Before performing administrative tasks that require root access
+- **Disable:** After completing administrative work (recommended default state)
+- **Status:** Check whether root can currently SSH to the server
+
+**Security:**
+
+- Root can only login with SSH keys (never passwords)
+- Script validates configuration before applying changes
+- Recommends testing connection in new terminal before closing current session
+- Best practice: Keep root access disabled except when needed
 
 ## SSL Certificates
 
@@ -1410,7 +1456,49 @@ The server is configured for true "set and forget" operation:
 This section tracks all configuration changes made to the Hetzner server (`hetzner-root` /
 `hetzner-kirby`). All server modifications must be documented here.
 
+### November 1, 2025
+
+- ✅ **SSH Configuration Script** - Created toggle script for root SSH access management
+
+  - Script: `/usr/local/bin/toggle-root-ssh`
+  - Source: `migration-script/toggle-root-ssh.sh`
+  - Commands: `enable`, `disable`, `status`
+  - Purpose: Safe and easy management of root SSH access
+  - Features:
+    - Automatically updates `/etc/ssh/sshd_config`
+    - Tests configuration before applying (`sshd -t`)
+    - Restarts SSH service safely
+    - Color-coded status messages
+  - Security: Root access disabled by default, enable only for administrative tasks
+
+- ✅ **SSH Configuration Update** - Updated sshd_config with modern directives
+
+  - Changed: `ChallengeResponseAuthentication no` → `KbdInteractiveAuthentication no`
+  - Reason: `ChallengeResponseAuthentication` is deprecated in newer OpenSSH versions
+  - Configuration: `/etc/ssh/sshd_config`
+  - Setting: `PermitRootLogin yes` (allows root login with SSH keys only when enabled)
+  - Apply changes: `sudo systemctl restart sshd`
+  - Status: Root SSH access currently enabled
+
+- ✅ **Shell Configuration Documentation** - Documented shell differences for users
+  - `root` user: bash shell (default Ubuntu)
+  - `kirbyuser`: fish shell (enhanced user experience)
+  - Impact: Scripts must use `bash -c` in GitHub Actions when deploying to kirbyuser
+
 ### October 31, 2025
+
+- ✅ **Fixed CORS Font Loading Issues** - Added CORS headers for cross-origin asset sharing
+
+  - Problem: Fonts loaded from `matthiashacksteiner.net` failed on `www.matthiashacksteiner.net` due
+    to CORS policy
+  - Solution: Added nginx location block for font files with permissive CORS headers
+  - Configuration: `/etc/nginx/sites-available/matthiashacksteiner`
+  - Headers added:
+    - `Access-Control-Allow-Origin: *` - Allow fonts from any origin
+    - `Access-Control-Allow-Methods: GET, OPTIONS`
+    - Font caching: 1 year with `immutable` cache control
+  - Impact: Fonts now load correctly on both www and non-www versions
+  - Backup: `/etc/nginx/sites-available/matthiashacksteiner.backup-before-cors`
 
 - ✅ **Added www Subdomain Support** - Fixed SSL for www subdomains on Hetzner-only sites
 
