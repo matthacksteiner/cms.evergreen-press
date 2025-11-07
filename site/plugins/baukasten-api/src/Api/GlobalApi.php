@@ -123,6 +123,16 @@ class GlobalApi
             "claimText" => (string) $site->headerClaim()->toObject()->claimText(),
             "claimFont" => (string) $site->headerClaim()->toObject()->claimFont(),
             "claimFontSize" => (string) $site->headerClaim()->toObject()->claimFontSize(),
+            "topBarToggle" => $site->topBarToggle()->toBool(false),
+            "topBarText" => (string) $site->topBarSettings()->toObject()->topBarText(),
+            "topBarBackground" => (string) $site->topBarSettings()->toObject()->topBarBackground(),
+            "topBarCloseButton" => $site->topBarSettings()->toObject()->topBarCloseButton()->toBool(true),
+            "topBarLink" => getLinkArray($site->topBarSettings()->toObject()->topBarLink()),
+            "topBarFont" => (string) $site->topBarSettings()->toObject()->textFont(),
+            "topBarFontSize" => (string) $site->topBarSettings()->toObject()->textSize(),
+            "topBarFontColor" => (string) $site->topBarSettings()->toObject()->textColor(),
+            "topBarFontAlign" => (string) $site->topBarSettings()->toObject()->textAlign(),
+
         ];
     }
 }
