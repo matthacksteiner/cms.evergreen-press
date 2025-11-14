@@ -1,0 +1,65 @@
+name: Deploy to Hetzner VPS
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create target directory on server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HETZNER_HOST }}
+          username: ${{ secrets.HETZNER_USER }}
+          key: ${{ secrets.HETZNER_KEY }}
+          script: |
+            bash -c 'if [ ! -d "/var/www/${{ secrets.HETZNER_PATH }}" ]; then sudo /usr/local/bin/add-site ${{ secrets.HETZNER_PATH }} ${{ secrets.HETZNER_USER }}; fi'
+
+      - name: Deploy files via rsync
+        uses: Burnett01/rsync-deployments@6.0.0
+        with:
+          switches: -avzr --delete --exclude="content" --exclude="site/languages" --exclude="site/accounts" --exclude=".vscode" --exclude=".git" --exclude=".env" --exclude="node_modules" --exclude="public/media" --exclude="vendor" --exclude="kirby" --exclude="storage" --exclude=".DS_Store" --exclude="server-setup" --exclude="docs"
+          remote_path: /var/www/${{ secrets.HETZNER_PATH }}/
+          remote_host: ${{ secrets.HETZNER_HOST }}
+          remote_user: ${{ secrets.HETZNER_USER }}
+          remote_key: ${{ secrets.HETZNER_KEY }}
+
+      - name: Create .env file
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HETZNER_HOST }}
+          username: ${{ secrets.HETZNER_USER }}
+          key: ${{ secrets.HETZNER_KEY }}
+          script: |
+            cd /var/www/${{ secrets.HETZNER_PATH }}/
+            bash -c 'cat > .env << EOF
+            # Kirby CMS Environment Variables
+            DEPLOY_URL=${{ secrets.DEPLOY_URL }}
+            KIRBY_DEBUG=false
+            KIRBY_CACHE=true
+            EOF'
+
+      - name: Install Composer dependencies
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HETZNER_HOST }}
+          username: ${{ secrets.HETZNER_USER }}
+          key: ${{ secrets.HETZNER_KEY }}
+          script: |
+            cd /var/www/${{ secrets.HETZNER_PATH }}/
+            composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Clear cache
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HETZNER_HOST }}
+          username: ${{ secrets.HETZNER_USER }}
+          key: ${{ secrets.HETZNER_KEY }}
+          script: |
+            cd /var/www/${{ secrets.HETZNER_PATH }}/
+            # Clear Kirby cache after deployment
+            bash -c 'rm -rf storage/cache/* storage/sessions/* 2>/dev/null || true'
