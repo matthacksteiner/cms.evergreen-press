@@ -1456,6 +1456,22 @@ The server is configured for true "set and forget" operation:
 This section tracks all configuration changes made to the Hetzner server (`hetzner-root` /
 `hetzner-kirby`). All server modifications must be documented here.
 
+### November 14, 2025
+
+- ✅ **fix-kirby-permissions Script Enhancement** - Added explicit parent directory ownership fix
+
+  - Script: `/usr/local/bin/fix-kirby-permissions`
+  - Problem: `public` and `site` directories sometimes owned by root after initial site creation,
+    blocking rsync deployments
+  - Solution: Added explicit `chown` commands for parent directories before fixing subdirectory
+    contents
+  - Changes:
+    - Now explicitly fixes ownership of `/var/www/[site]/public` directory
+    - Now explicitly fixes ownership of `/var/www/[site]/site` directory
+    - Ensures rsync can create files/subdirectories during GitHub Actions deployments
+  - Impact: Prevents "Permission denied" errors during deployments to new sites
+  - Backup: `/usr/local/bin/fix-kirby-permissions.backup-20251114-*`
+
 ### November 1, 2025
 
 - ✅ **SSH Configuration Script** - Created toggle script for root SSH access management
